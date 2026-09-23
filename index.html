@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lia Hoff — Comportamento e Bem-estar Animal | Médica-Veterinária Natalia Martins Hoffmann — CRMV-SC 07725.">
+<link rel="icon" type="image/png" href="assets/logo-lia-hoff.png">
+<title>Lia Hoff — Comportamento e Bem-estar Animal</title>
+<style>
+:root{
+  --blue:#07588f; --blue2:#0b6fae; --cyan:#19b7bd; --ink:#263b45;
+  --muted:#6f7d83; --bg:#f6f8f8; --card:#fff; --line:#e4eaec;
+  --soft:#edf7f7; --orange:#f3a43b; --red:#c84d4d; --green:#198c78;
+  --shadow:0 3px 14px rgba(26,54,66,.09); --r:12px;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit} button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;background:#fff;border-right:1px solid var(--line);position:fixed;left:0;top:0;bottom:0;z-index:20;overflow:auto}
+.brand{padding:18px 18px 14px;border-bottom:1px solid var(--line)}
+.brand img{width:205px;height:auto;max-height:150px;object-fit:contain;object-position:center;display:block;margin:0 auto}
+.brand small{display:block;margin-top:8px;color:var(--muted);font-size:11px}
+.nav{padding:12px 10px}.nav button{width:100%;border:0;background:none;text-align:left;padding:12px 14px;border-radius:9px;color:#53636a;margin:2px 0;display:flex;gap:12px;align-items:center}
+.nav button:hover,.nav button.active{background:#eaf8f7;color:#075f68;font-weight:600}
+.nav .ico{width:22px;text-align:center;font-size:17px}
+.nav .section{padding:15px 14px 6px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#9aa6aa;font-weight:700}
+.main{margin-left:250px;width:calc(100% - 250px)}
+.topbar{height:62px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 20px;position:sticky;top:0;z-index:15}
+.search{flex:1;max-width:760px;border:1px solid #ccd5d8;border-radius:24px;height:40px;display:flex;align-items:center;padding:0 15px;gap:9px;color:#9aa5a9}
+.search input{border:0;outline:0;width:100%;font-size:14px}
+.top-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.avatar{width:54px;height:54px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}.brand-avatar img{display:block;width:100%;height:100%;object-fit:contain}
+.btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 14px;color:var(--ink);font-weight:600}
+.btn.primary{background:var(--cyan);border-color:var(--cyan);color:#fff}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.danger{background:#fff1f1;color:var(--red);border-color:#f0cccc}
+.sync-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:700;color:#6f7d83}.sync-dot{width:8px;height:8px;border-radius:50%;background:#9aa6aa}.sync-pill.ok{color:#177866}.sync-pill.ok .sync-dot{background:var(--green)}.sync-pill.warn{color:#8d681e}.sync-pill.warn .sync-dot{background:var(--orange)}.sync-pill.err{color:#a53f3f}.sync-pill.err .sync-dot{background:var(--red)}
+.backup-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.content{padding:22px;max-width:1600px;margin:auto}
+.view{display:none}.view.active{display:block}
+.page-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.page-title h1{font-size:24px;margin:0}.page-title p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
+.card h3{margin:0 0 13px;font-size:16px}.card .sub{color:var(--muted);font-size:12px}
+.stat{display:flex;justify-content:space-between;align-items:center}.stat .num{font-size:29px;font-weight:750;margin-top:8px}.stat .icon{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:#edf7f7;font-size:20px}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick button{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px;text-align:left;font-weight:600}.quick button:hover{border-color:var(--cyan)}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 12px}.section-title h2{font-size:18px;margin:0}.link{color:#078d92;background:none;border:0;font-weight:700}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th{background:#f8fafb;color:#6b797f;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.03em}.table th,.table td{padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}.table tr:hover td{background:#fbfdfd}
+.badge{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:700}.badge.blue{background:#e8f2fb;color:#07588f}.badge.green{background:#e6f6f1;color:#177866}.badge.orange{background:#fff2dc;color:#9a6617}.badge.red{background:#fdeaea;color:#a53f3f}.badge.gray{background:#eef1f2;color:#68757a}
+.hero{background:linear-gradient(135deg,#07588f,#0b6fae);color:#fff;border-radius:13px;padding:20px;display:flex;justify-content:space-between;gap:20px}.hero h2{margin:0 0 5px}.hero p{margin:0;opacity:.9;font-size:13px}.hero .hero-actions{display:flex;gap:8px;align-items:center}.hero .btn{background:#fff;color:#07588f;border:0}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px}.kpi b{font-size:21px;display:block;margin-top:5px}.kpi span{font-size:11px;color:var(--muted)}
+.behavior-card{border-left:4px solid var(--cyan)}.triage-score{font-size:28px;font-weight:800}.meter{height:8px;background:#e9eef0;border-radius:20px;overflow:hidden;margin:9px 0}.meter i{display:block;height:100%;background:var(--cyan);border-radius:20px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.flow div{background:#f7fafb;border:1px solid var(--line);border-radius:9px;padding:11px;text-align:center;font-size:12px}.flow b{display:block;margin-bottom:4px;color:var(--blue)}
+.alert{padding:12px 14px;border-radius:9px;margin:8px 0;font-size:12px}.alert.red{background:#fff0f0;color:#8e3838;border:1px solid #f2d0d0}.alert.yellow{background:#fff8e9;color:#8d681e;border:1px solid #f0dfb3}.alert.green{background:#ecf8f5;color:#226f61;border:1px solid #cdebe4}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:750;color:#5c6b70;text-transform:uppercase;letter-spacing:.03em}.field input,.field select,.field textarea{border:1px solid #d6dfe1;border-radius:8px;padding:10px;outline:none;background:#fff;color:var(--ink)}.field textarea{min-height:82px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #e5f7f7}
+.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid #d8e2e4;background:#fff;padding:7px 9px;border-radius:20px;font-size:11px;cursor:pointer}.chip.on{background:#e5f7f7;border-color:#5bc8ca;color:#08686b;font-weight:700}
+.modal-bg{position:fixed;inset:0;background:rgba(20,35,42,.48);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-bg.open{display:flex}.modal{background:#fff;width:min(980px,100%);max-height:92vh;overflow:auto;border-radius:14px;box-shadow:0 20px 70px rgba(0,0,0,.25)}.modal-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:2}.modal-head h2{margin:0;font-size:18px}.modal-body{padding:20px}.modal-foot{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
+.close{border:0;background:#f1f4f5;width:32px;height:32px;border-radius:50%}
+.financial{background:linear-gradient(135deg,#f8fcfc,#eef8f7);border:1px solid #d9eeee}.money{font-size:25px;font-weight:800;color:#146f6c}
+.chart{display:flex;align-items:end;gap:12px;height:150px;padding-top:15px}.bar{flex:1;background:#a8dede;border-radius:6px 6px 0 0;position:relative;min-width:24px}.bar span{position:absolute;top:-18px;font-size:10px;width:100%;text-align:center;color:#617176}.bar label{position:absolute;bottom:-20px;font-size:10px;width:100%;text-align:center;color:#7c898d}
+.print-area{background:#fff;padding:35px;max-width:850px;margin:auto;border:1px solid #ddd}.rx-head{display:flex;justify-content:space-between;border-bottom:2px solid var(--blue);padding-bottom:14px}.rx-logo{font-size:24px;font-weight:800;color:var(--blue)}.rx-logo small{display:block;font-size:10px;color:#4e6067;font-weight:500}.rx-section{margin-top:18px}.rx-line{border-bottom:1px solid #ddd;padding:9px 0}.rx-footer{margin-top:45px;text-align:center;border-top:1px solid #ccc;padding-top:15px;font-size:12px;color:#667}.rx-signature{margin:55px auto 0;text-align:center;max-width:340px;border-top:1px solid #263b45;padding-top:8px}.rx-meta{font-size:12px;color:#5f6e73;line-height:1.55}.rx-legal{font-size:10px;color:#6f7d83;background:#f7fafb;border:1px solid #dfe7e9;padding:10px;border-radius:8px;margin-top:16px}.rx-warning{background:#fff4e7;border:1px solid #f0d4a5;color:#7b5a21;padding:11px;border-radius:8px;font-size:11px;line-height:1.5}
+.special-layout{border:1px solid #d9e4e8;border-radius:12px;background:#f9fbfc;padding:16px}.special-banner{display:flex;gap:10px;align-items:flex-start;background:#eef6fb;border:1px solid #cfe1ec;color:#234d64;padding:12px;border-radius:10px;margin-bottom:14px}.special-title{font-weight:800;color:var(--blue);font-size:15px}.official-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.official-links a{display:inline-flex;align-items:center;padding:8px 10px;border:1px solid #cfe1ec;border-radius:8px;color:var(--blue);text-decoration:none;background:#fff;font-size:11px;font-weight:700}.backup-card{border-left:4px solid var(--blue);background:#f7fbfd}.retention-ok{color:var(--green);font-weight:800}.retention-warn{color:#9a671b;font-weight:800}.special-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.special-grid .full{grid-column:1/-1}.backup-list{margin-top:10px;display:grid;gap:7px}.backup-row{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:11px}@media(max-width:760px){.special-grid{grid-template-columns:1fr}.special-grid .full{grid-column:auto}.backup-row{flex-direction:column}}
+@media(max-width:1050px){.g4{grid-template-columns:repeat(2,1fr)}.kpi-row{grid-template-columns:repeat(3,1fr)}.flow{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.sidebar{width:70px}.sidebar .brand small,.sidebar .nav span:not(.ico),.sidebar .section{display:none}.brand img{width:46px;height:54px;object-fit:contain;object-position:center;margin:0 auto}.main{margin-left:70px;width:calc(100% - 70px)}.topbar{padding:0 10px}.topbar .search{max-width:none}.top-actions .hide-m{display:none}.content{padding:12px}.g4,.g3,.g2{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{flex-direction:column}}
+
+.filter-row{display:grid;grid-template-columns:1fr 1fr 2fr;gap:12px}.filter-row label{font-size:12px;font-weight:700;color:var(--muted)}.filter-row select,.filter-row input{display:block;width:100%;margin-top:6px}.timeline-full{position:relative;padding:8px 8px 8px 28px}.timeline-full:before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}.timeline-event{position:relative;padding:0 0 18px 22px}.timeline-event:before{content:"";position:absolute;left:-23px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--cyan);border:3px solid var(--card);box-shadow:0 0 0 1px var(--line)}.timeline-event .timeline-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.timeline-event .timeline-title{font-weight:800;color:var(--ink)}.timeline-event .timeline-date{font-size:12px;color:var(--muted)}.timeline-event .timeline-body{margin-top:6px;color:#52636a;line-height:1.55}.timeline-event .timeline-actions{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}@media(max-width:760px){.filter-row{grid-template-columns:1fr}.timeline-event .timeline-head{display:block}.timeline-event .timeline-date{margin-top:3px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">
+    <img src="assets/logo-lia-hoff.png" alt="Lia Hoff — Comportamento e Bem-estar Animal">
+    <small>Comportamento e Bem-estar Animal</small>
+  </div>
+  <nav class="nav">
+    <button class="active" onclick="show('inicio',this)"><span class="ico">⌂</span><span>Início</span></button>
+    <button onclick="show('painel',this)"><span class="ico">▦</span><span>Painel de Controle</span></button>
+    <button onclick="show('responsaveis',this)"><span class="ico">♙</span><span>Responsáveis</span></button>
+    <button onclick="show('animais',this)"><span class="ico">🐾</span><span>Animais</span></button>
+    <button onclick="show('historico',this)"><span class="ico">◷</span><span>Histórico</span></button>
+    <button onclick="show('retornos',this)"><span class="ico">↩</span><span>Retornos</span></button>
+    <button onclick="show('agenda',this)"><span class="ico">▣</span><span>Agenda</span></button>
+    <div class="section">Clínica</div>
+    <button onclick="show('consultas',this)"><span class="ico">▤</span><span>Consultas</span></button>
+    <button onclick="show('prontuarios',this)"><span class="ico">▥</span><span>Prontuários</span></button>
+    <button onclick="show('prescricoes',this)"><span class="ico">▱</span><span>Prescrições</span></button>
+    <button onclick="show('comportamento',this)"><span class="ico">🧠</span><span>Comportamento</span></button>
+    <button onclick="show('evolucao',this)"><span class="ico">⌁</span><span>Evolução</span></button>
+    <div class="section">Gestão</div>
+    <button onclick="show('financeiro',this)"><span class="ico">$</span><span>Financeiro</span></button>
+    <button onclick="show('relatorios',this)"><span class="ico">▤</span><span>Relatórios</span></button>
+    <button onclick="show('config',this)"><span class="ico">⚙</span><span>Configurações</span></button>
+  </nav>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div class="search" style="position:relative">⌕ <input id="globalSearch" placeholder="Buscar responsável ou animal" oninput="searchAll(this.value)" autocomplete="off"><div id="searchSuggestions" class="card" style="display:none;position:absolute;z-index:20;top:100%;left:0;right:0;padding:6px;max-height:300px;overflow:auto"></div></div>
+  <div class="top-actions">
+    <div id="syncPill" class="sync-pill"><span class="sync-dot"></span><span id="syncText">Local</span></div>
+    <button class="btn primary hide-m" onclick="openModal('cadastro')">＋ Adicionar Cadastro</button>
+<div class="avatar brand-avatar"><img src="assets/logo-lia-hoff.png" alt="Marca Lia Hoff"></div><span class="hide-m" style="font-size:13px">Lia Hoff<br><small style="color:#8b969a">Natalia Martins Hoffmann · CRMV-SC 07725</small><br><small style="color:#8b969a">Natalia Hoffmann Serviços Veterinários Ltda - ME · CNPJ 57.586.835/0001-92</small></span>
+  </div>
+</header>
+
+<div class="content">
+
+<section id="inicio" class="view active">
+  <div class="page-title"><div><h1>Olá, Lia.</h1><p>Visão geral da sua rotina clínica e dos casos de comportamento.</p></div><button class="btn blue" onclick="openModal('consulta')">＋ Nova consulta</button></div>
+  <div class="grid g4">
+    <div class="card stat"><div><div class="sub">Consultas hoje</div><div class="num">0</div></div><div class="icon">▣</div></div>
+    <div class="card stat"><div><div class="sub">Animais cadastrados</div><div class="num" id="statAnimals">0</div></div><div class="icon">🐾</div></div>
+    <div class="card stat"><div><div class="sub">Casos em acompanhamento</div><div class="num" id="statCases">0</div></div><div class="icon">🧠</div></div>
+    <div class="card stat"><div><div class="sub">Receita no mês</div><div class="num">R$ 0,00</div></div><div class="icon">R$</div></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3>Ações rápidas</h3>
+      <div class="quick">
+        <button onclick="openModal('responsavel')">👤 Novo responsável</button>
+        <button onclick="openModal('animal')">🐾 Novo animal</button>
+        <button onclick="openModal('consulta')">▣ Nova consulta</button>
+        <button onclick="openModal('prescricao')">▱ Nova prescrição</button>
+        <button onclick="show('comportamento')">🧠 Nova triagem comportamental</button>
+        <button onclick="show('financeiro')">$ Lançar pagamento</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Próximos compromissos</h3>
+      <div class="alert green">Sua agenda está pronta para receber os primeiros atendimentos.</div>
+      <button class="btn" onclick="show('agenda')">Abrir agenda</button>
+    </div>
+  </div>
+  <div class="section-title"><h2>Visão rápida do comportamento</h2><button class="link" onclick="show('comportamento')">Abrir módulo →</button></div>
+  <div class="hero">
+    <div><h2>Núcleo de Comportamento e Bem-estar</h2><p>Triagem estruturada, formulação do caso, plano de intervenção, acompanhamento e comunicação com o responsável.</p></div>
+    <div class="hero-actions"><button class="btn" onclick="openModal('triagem')">Iniciar triagem</button></div>
+  </div>
+</section>
+
+<section id="painel" class="view">
+  <div class="page-title"><div><h1>Painel de Controle</h1><p>Indicadores para acompanhar a operação da clínica.</p></div></div>
+  <div class="kpi-row">
+    <div class="kpi"><span>Atendimentos no mês</span><b>0</b></div><div class="kpi"><span>Retornos previstos</span><b>0</b></div><div class="kpi"><span>Casos ativos</span><b>0</b></div><div class="kpi"><span>Prescrições</span><b>0</b></div><div class="kpi"><span>Receita recebida</span><b>R$ 0</b></div>
+  </div>
+   <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Casos por nível de risco</h3><div id="riskChart" class="chart"></div></div><div class="card financial"><h3>Financeiro</h3><p class="sub">Recebimentos acumulados no período</p><div class="money">R$ 0,00</div><p class="sub">Sem lançamentos ainda.</p></div></div>
+</section>
+
+<section id="responsaveis" class="view">
+  <div class="page-title"><div><h1>Responsáveis</h1><p>Cadastro e histórico dos responsáveis pelos animais.</p></div><button class="btn primary" onclick="openModal('responsavel')">＋ Novo responsável</button></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Nome</th><th>Telefone</th><th>E-mail</th><th>Animais</th><th>Ações</th></tr></thead><tbody id="tutoresTable"><tr><td colspan="5" style="color:#879398">Nenhum responsável cadastrado.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="animais" class="view">
+  <div class="page-title"><div><h1>Animais</h1><p>Prontuário, histórico clínico e comportamento.</p></div><button class="btn primary" onclick="openModal('animal')">＋ Novo animal</button></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Animal</th><th>Espécie</th><th>Raça</th><th>Responsável</th><th>Comportamento</th><th>Ação</th></tr></thead><tbody id="animalsTable"><tr><td colspan="6" style="color:#879398">Nenhum animal cadastrado.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="prontuarios" class="view">
+  <div class="page-title"><div><h1>Prontuários</h1><p>Prontuário clínico integrado ao comportamento, consultas e prescrições.</p></div><button class="btn primary" onclick="openModal('prontuario')">＋ Novo registro de prontuário</button></div>
+  <div class="alert green"><b>Estrutura clínica:</b> identificação do animal → responsável → histórico médico → avaliação → comportamento → conduta/plano → documentos e evolução. O sistema não gera diagnóstico automático.</div>
+  <div class="card" style="margin-top:16px"><div class="table-wrap"><table class="table"><thead><tr><th>Animal</th><th>Responsável</th><th>Última atualização</th><th>Consultas</th><th>Comportamento</th><th></th></tr></thead><tbody id="recordsTable"><tr><td colspan="6">Nenhum prontuário iniciado.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="historico" class="view">
+  <div class="page-title"><div><h1>Histórico clínico</h1><p>Timeline completa dos eventos do animal: consultas, comportamento, planos, evoluções, prescrições, retornos e registros financeiros.</p></div><button class="btn" onclick="exportHistoryReport()">⬇ Exportar histórico</button></div>
+  <div class="card">
+    <div class="filter-row">
+      <label>Animal<select id="historyAnimal" onchange="renderHistory()"><option value="">Todos os animais</option></select></label>
+      <label>Tipo<select id="historyType" onchange="renderHistory()"><option value="">Todos os eventos</option><option value="Consulta">Consultas</option><option value="Comportamento">Comportamento</option><option value="Plano">Planos de intervenção</option><option value="Evolução">Evoluções</option><option value="Prescrição">Prescrições</option><option value="Retorno">Retornos</option><option value="Financeiro">Financeiro</option></select></label>
+      <label>Buscar<input id="historySearch" oninput="renderHistory()" placeholder="animal, conteúdo, responsável…"></label>
+    </div>
+  </div>
+  <div class="grid g4" style="margin-top:16px"><div class="card"><span class="sub">Eventos</span><div class="num" id="historyCount">0</div></div><div class="card"><span class="sub">Consultas</span><div class="num" id="historyConsultas">0</div></div><div class="card"><span class="sub">Comportamento</span><div class="num" id="historyBehavior">0</div></div><div class="card"><span class="sub">Prescrições</span><div class="num" id="historyRx">0</div></div></div>
+  <div class="card" style="margin-top:16px"><div id="historyTimeline" class="timeline-full"><div class="sub">Nenhum evento registrado ainda.</div></div></div>
+</section>
+
+<section id="retornos" class="view">
+  <div class="page-title"><div><h1>Retornos</h1><p>Acompanhe revisões e reavaliações programadas a partir das consultas.</p></div></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Animal</th><th>Tipo de consulta</th><th>Responsável</th><th>Ação</th></tr></thead><tbody id="retornosTable"><tr><td colspan="5">Nenhum retorno programado.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="agenda" class="view">
+  <div class="page-title"><div><h1>Agenda</h1><p>Organize consultas, retornos e horários reservados.</p></div><button class="btn primary" onclick="openModal('consulta')">＋ Nova consulta</button></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Horário</th><th>Animal</th><th>Tipo</th><th>Status</th><th>Valor</th></tr></thead><tbody id="agendaTable"><tr><td colspan="7">Nenhum compromisso.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="consultas" class="view">
+  <div class="page-title"><div><h1>Consultas</h1><p>Registro clínico e comportamental dos atendimentos.</p></div><button class="btn primary" onclick="openModal('consulta')">＋ Registrar consulta</button></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Animal</th><th>Modalidade</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead><tbody id="consultasTable"><tr><td colspan="5">Nenhuma consulta.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="prescricoes" class="view">
+  <div class="page-title"><div><h1>Prescrições e Receitas</h1><p>Emissão, controle documental e guarda das prescrições médico-veterinárias.</p></div><button class="btn primary" onclick="openModal('prescricao')">＋ Nova prescrição</button></div>
+  <div class="grid g4">
+    <div class="card"><h3>Prescrições</h3><div class="num" id="rxCount">0</div><p class="sub">Registros armazenados.</p></div>
+    <div class="card"><h3>Especiais</h3><div class="num" id="rxSpecialCount">0</div><p class="sub">Controle especial / retenção / notificações.</p></div>
+    <div class="card"><h3>Backup mensal</h3><div id="backupStatus" class="badge orange" style="margin-top:8px">Verificando…</div><p class="sub">Novas prescrições desde o último backup.</p></div>
+    <div class="card"><h3>Guarda documental</h3><div class="badge green" style="margin-top:8px">5 anos</div><p class="sub">Controle de retenção a partir do atendimento.</p></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card backup-card">
+      <h3>🗄️ Backup mensal das prescrições</h3>
+      <p class="sub">O navegador não pode baixar arquivos sozinho de forma confiável todos os meses. Por isso o sistema cria o lembrete mensal e oferece o backup com um clique.</p>
+      <div id="backupMessage" class="alert yellow">Nenhum backup mensal realizado ainda.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" onclick="backupNewPrescriptions()">⬇ Backup das novas prescrições</button><button class="btn" onclick="backupAllPrescriptions()">⬇ Backup completo</button></div>
+      <div id="backupHistory" class="backup-list"></div>
+    </div>
+    <div class="card">
+      <h3>📋 Modelos oficiais e receituários especiais</h3>
+      <p class="sub">Os modelos de Notificação de Receita e Receita de Controle Especial devem seguir integralmente as versões vigentes da Anvisa. O sistema separa o cadastro especial da receita comum e não redesenha o modelo oficial como se fosse um documento válido.</p>
+      <div class="official-links">
+        <a href="https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/controlados/sncr/modelos-de-receituarios/modelos-vigentes" target="_blank" rel="noopener">Modelos vigentes — Anvisa</a>
+        <a href="https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/controlados/sncr/receituario-fisico/notificacao-de-receita-a-vet.pdf" target="_blank" rel="noopener">Notificação A VET</a>
+        <a href="https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/controlados/sncr/modelos-de-receituarios/notificacao-de-receita-b-vet.pdf/view" target="_blank" rel="noopener">Notificação B VET</a>
+      </div>
+      <div class="alert red" style="margin-top:12px"><b>Atenção:</b> a partir de 30/09/2026 o SNCR inicia nova etapa eletrônica. As receitas eletrônicas especiais precisam usar os modelos eletrônicos oficiais e, quando aplicável, integração ao SNCR; a tela da Lia Hoff ainda não é integrada ao SNCR.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Regras incorporadas ao módulo</h3>
+    <div class="alert green"><b>Receita comum:</b> organização dos dados clínicos, medicamento/produto, apresentação, quantidade, via, posologia, duração e orientações.</div>
+    <div class="alert yellow"><b>Receituário especial:</b> possui fluxo e layout próprios dentro do cadastro. A impressão oficial deve ser feita pelo modelo vigente da Anvisa/autoridade sanitária ou por sistema integrado ao SNCR, quando aplicável.</div>
+    <div class="alert green"><b>Identificação profissional:</b> Médica-Veterinária Natalia Martins Hoffmann — CRMV-SC 07725.</div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Registros de prescrição</h3><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Animal</th><th>Medicamento</th><th>Tipo</th><th>Ações</th></tr></thead><tbody id="prescriptionsTable"></tbody></table></div></div>
+</section>
+
+<section id="comportamento" class="view">
+  <div class="page-title"><div><h1>Comportamento e Bem-estar</h1><p>Triagem estruturada, formulação do caso e acompanhamento.</p></div><button class="btn primary" onclick="openModal('triagem')">＋ Nova triagem</button></div>
+  <div class="grid g4">
+    <div class="card stat"><div><div class="sub">Casos ativos</div><div class="num" id="caseCount">0</div></div><div class="icon">🧠</div></div>
+    <div class="card stat"><div><div class="sub">Triagens</div><div class="num">0</div></div><div class="icon">✓</div></div>
+    <div class="card stat"><div><div class="sub">Planos ativos</div><div class="num">0</div></div><div class="icon">▤</div></div>
+    <div class="card stat"><div><div class="sub">Reavaliações</div><div class="num">0</div></div><div class="icon">⌁</div></div>
+  </div>
+  <div class="card behavior-card" style="margin-top:16px">
+    <h3>Fluxo recomendado de avaliação</h3>
+    <div class="flow">
+      <div><b>1. Triagem</b>Queixa e risco</div><div><b>2. História</b>Contexto e antecedentes</div><div><b>3. Formulação</b>Hipóteses e fatores</div><div><b>4. Plano</b>Manejo e intervenção</div><div><b>5. Evolução</b>Medir e revisar</div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3>Triagem inicial</h3>
+      <p class="sub">Estrutura inspirada em práticas de avaliação comportamental veterinária e análise funcional, sem substituir o julgamento clínico.</p>
+      <div class="alert yellow">Pergunte primeiro sobre segurança, início do problema, frequência, contexto, consequências e possíveis fatores médicos.</div>
+      <button class="btn blue" onclick="openModal('triagem')">Abrir ficha de triagem</button>
+    </div>
+    <div class="card">
+      <h3>Rastreio de sinais de alerta</h3>
+      <div id="redFlags">
+        <div class="alert green">Nenhum caso registrado ainda.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-title"><h2>Casos de comportamento</h2></div>
+  <div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Animal</th><th>Queixa principal</th><th>Risco</th><th>Intensidade</th><th>Última avaliação</th><th>Plano</th><th></th></tr></thead><tbody id="casesTable"><tr><td colspan="7">Nenhum caso cadastrado.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="evolucao" class="view"><div class="page-title"><div><h1>Evolução comportamental</h1><p>Metas mensuráveis, registros de evolução, adesão e reavaliação dos casos.</p></div><button class="btn primary" onclick="openModal('evolucao')">＋ Registrar evolução</button></div><div class="grid g4"><div class="card stat"><div><div class="sub">Registros</div><div class="num" id="evoCount">0</div></div><div class="icon">⌁</div></div><div class="card"><span class="sub">Frequência média</span><div class="num" id="evoFreq">—</div></div><div class="card"><span class="sub">Intensidade média</span><div class="num" id="evoInt">—</div></div><div class="card"><span class="sub">Adesão média</span><div class="num" id="evoAdesao">—</div></div></div><div class="section-title"><h2>Planos de intervenção</h2><button class="btn blue" onclick="openModal('plano')">＋ Novo plano</button></div><div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Animal</th><th>Objetivo</th><th>Metas</th><th>Reavaliação</th><th>Status</th><th></th></tr></thead><tbody id="plansTable"><tr><td colspan="6">Nenhum plano registrado.</td></tr></tbody></table></div></div><div class="section-title"><h2>Registros de evolução</h2></div><div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Animal</th><th>Indicador</th><th>Frequência</th><th>Intensidade</th><th>Adesão</th><th></th></tr></thead><tbody id="evolutionTable"><tr><td colspan="7">Nenhuma evolução registrada.</td></tr></tbody></table></div></div></section>
+
+<section id="financeiro" class="view">
+  <div class="page-title"><div><h1>Financeiro</h1><p>Controle simples de consultas, recebimentos e valores em aberto.</p></div><button class="btn primary" onclick="openModal('pagamento')">＋ Lançar pagamento</button></div>
+  <div class="grid g4">
+    <div class="card financial"><span class="sub">Recebido no mês</span><div class="money">R$ 0,00</div></div>
+    <div class="card"><span class="sub">A receber</span><div class="money" style="color:#9a6617">R$ 0,00</div></div>
+    <div class="card"><span class="sub">Consultas pagas</span><div class="money">0</div></div>
+    <div class="card"><span class="sub">Cancelamentos</span><div class="money" style="color:#a53f3f">0</div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Lançamentos</h3><div class="table-wrap"><table class="table"><thead><tr><th>Data</th><th>Animal</th><th>Serviço</th><th>Valor</th><th>Status</th><th>Forma</th></tr></thead><tbody id="financeTable"><tr><td colspan="6">Nenhum lançamento.</td></tr></tbody></table></div></div>
+</section>
+
+<section id="relatorios" class="view">
+  <div class="page-title"><div><h1>Relatórios</h1><p>Gere documentos clínicos, comportamentais e financeiros.</p></div></div>
+  <div class="grid g3">
+    <div class="card"><h3>Relatório comportamental</h3><p class="sub">Triagem, formulação, plano e evolução.</p><button class="btn" onclick="toast('Selecione um caso para gerar o relatório.')">Gerar</button></div>
+    <div class="card"><h3>Resumo financeiro</h3><p class="sub">Recebimentos e valores em aberto.</p><button class="btn" onclick="toast('Ainda não há lançamentos.')">Gerar</button></div>
+    <div class="card"><h3>Receita</h3><p class="sub">Documento de prescrição para impressão.</p><button class="btn" onclick="openModal('prescricao')">Criar</button></div>
+  </div>
+</section>
+
+<section id="config" class="view">
+  <div class="page-title"><div><h1>Configurações</h1><p>Identidade profissional, segurança dos dados, backup e sincronização.</p></div></div>
+  <div class="grid g2">
+    <div class="card"><h3>Identidade profissional</h3><div class="field"><label>Marca</label><input value="Lia Hoff" readonly></div><div class="field" style="margin-top:10px"><label>Profissional responsável</label><input value="Médica-Veterinária Natalia Martins Hoffmann" readonly></div><div class="field" style="margin-top:10px"><label>CRMV-SC</label><input value="07725" readonly></div><div class="field" style="margin-top:10px"><label>Área de atuação</label><input value="Comportamento e Bem-estar Animal" readonly></div><div class="field" style="margin-top:10px"><label>Estabelecimento / empresa</label><input value="Natalia Hoffmann Serviços Veterinários Ltda - ME" readonly></div><div class="field" style="margin-top:10px"><label>CNPJ</label><input value="57.586.835/0001-92" readonly></div></div>
+    <div class="card"><h3>Status dos dados</h3><div id="syncStatusBox" class="alert yellow">Os dados são salvos localmente neste dispositivo. Configure o Firebase para sincronizar entre computador, celular e tablet.</div><div class="backup-actions"><button class="btn" onclick="exportBackup()">⬇ Exportar backup</button><button class="btn" onclick="importBackup()">⬆ Importar backup</button><button class="btn danger" onclick="clearLocalData()">Limpar dados locais</button></div></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Firebase — sincronização entre dispositivos</h3>
+    <p class="sub">A conexão usa Firebase Authentication + Cloud Firestore. A configuração abaixo fica salva apenas neste navegador. A aplicação não possui dados fictícios e não envia nada para a nuvem sem autenticação.</p>
+    <div class="alert green"><b>Arquitetura:</b> cada profissional autenticado recebe seu próprio espaço de dados. O primeiro dispositivo pode enviar os dados locais para a nuvem; os demais carregam o mesmo estado após o login.</div>
+    <div class="form-grid">
+      <div class="field"><label>API Key</label><input id="fbApiKey" placeholder="AIza..."></div>
+      <div class="field"><label>Auth Domain</label><input id="fbAuthDomain" placeholder="seu-projeto.firebaseapp.com"></div>
+      <div class="field"><label>Project ID</label><input id="fbProjectId" placeholder="seu-projeto"></div>
+      <div class="field"><label>Storage Bucket</label><input id="fbStorageBucket" placeholder="seu-projeto.firebasestorage.app"></div>
+      <div class="field"><label>Messaging Sender ID</label><input id="fbMessagingSenderId" placeholder="123456789"></div>
+      <div class="field"><label>App ID</label><input id="fbAppId" placeholder="1:123456789:web:..."></div>
+      <div class="field"><label>E-mail de acesso</label><input id="fbEmail" type="email" placeholder="profissional@..." autocomplete="username"></div>
+      <div class="field"><label>Senha</label><input id="fbPassword" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+    </div>
+    <div class="backup-actions">
+      <button class="btn blue" onclick="connectFirebase()">Conectar e sincronizar</button>
+      <button class="btn" onclick="createFirebaseAccount()">Criar acesso</button>
+      <button class="btn" onclick="signOutFirebase()">Sair</button>
+    </div>
+    <div id="fbUserStatus" class="sub" style="margin-top:10px">Não conectado.</div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Regras importantes</h3><div class="alert yellow">Antes de usar em produção, configure as regras do Firestore para permitir acesso somente ao usuário autenticado. Não publique dados clínicos reais em um projeto sem regras de segurança revisadas.</div><p class="sub">Nesta versão, a sincronização é um espelho simples do estado do aplicativo (estratégia “última gravação vence”). Para volumes maiores, o próximo passo é separar prontuários, consultas, prescrições e financeiro em coleções individuais com trilha de auditoria.</p></div>
+</section>
+
+</div></main></div>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Novo cadastro</h2><button class="close" onclick="closeModal()">×</button></div><div class="modal-body" id="modalBody"></div><div class="modal-foot" id="modalFoot"></div></div></div>
+
+<script>
+const STORAGE_KEY='lia-hoff-state-v2';
+const STORAGE_BACKUP_KEY='lia-hoff-state-previous-v1';
+const DEVICE_KEY='lia-hoff-device-id-v1';
+const FIREBASE_CONFIG_KEY='lia-hoff-firebase-config-v1';
+const state={tutores:[],animais:[],consultas:[],casos:[],prescricoes:[],financeiro:[],prontuarios:[],planos:[],evolucoes:[]};
+const $=id=>document.getElementById(id);
+let persistTimer=null;
+let cloudRevision=0, conflictSnapshot=null;
+let editingTutor=null,editingAnimal=null,currentPatientId=null;
+function toast(msg){const t=document.createElement('div');t.textContent=msg;Object.assign(t.style,{position:'fixed',right:'22px',bottom:'22px',background:'#263b45',color:'#fff',padding:'12px 16px',borderRadius:'9px',zIndex:100,fontSize:'13px',boxShadow:'0 8px 25px #0003'});document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+function show(id,btn){currentPatientId=null;document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});renderAll()}
+function closeModal(){$('modalBg').classList.remove('open')}
+function modal(title,body,foot){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modalFoot').innerHTML=foot;$('modalBg').classList.add('open');if($('pTipo'))toggleRxSpecialFields()}
+function openModal(type,arg){
+  if(type!=='prontuario')currentPatientId=null;
+  const today=new Date().toISOString().slice(0,10);
+  const animalList=`<datalist id="animalList">${state.animais.map(a=>`<option value="${escapeHtml(a.nome)}">`).join('')}</datalist>`;
+  const tutorList=`<datalist id="tutorList">${state.tutores.map(t=>`<option value="${escapeHtml(t.nome)}">`).join('')}</datalist>`;
+  let title='',body='',foot='<button class="btn" onclick="closeModal()">Cancelar</button>';
+  switch(type){
+    case 'cadastro':
+      title='Adicionar cadastro';
+      body='<div class="quick">'
+        +'<button onclick="closeModal();openModal(\'responsavel\')">👤 Novo responsável</button>'
+        +'<button onclick="closeModal();openModal(\'animal\')">🐾 Novo animal</button>'
+        +'<button onclick="closeModal();openModal(\'consulta\')">▣ Nova consulta</button>'
+        +'<button onclick="closeModal();openModal(\'prescricao\')">▱ Nova prescrição</button>'
+        +'<button onclick="closeModal();openModal(\'triagem\')">🧠 Nova triagem comportamental</button>'
+        +'<button onclick="closeModal();openModal(\'prontuario\')">▥ Novo registro de prontuário</button>'
+        +'<button onclick="closeModal();openModal(\'plano\')">✦ Novo plano de intervenção</button>'
+        +'<button onclick="closeModal();openModal(\'evolucao\')">⌁ Registrar evolução</button>'
+        +'<button onclick="closeModal();openModal(\'pagamento\')">$ Lançar pagamento</button>'
+        +'</div>';
+      foot='<button class="btn" onclick="closeModal()">Fechar</button>';
+      break;
+    case 'responsavel':
+      editingTutor=arg||null; title=editingTutor?'Editar responsável':'Novo responsável';
+      body=`<div class="form-grid">
+        <div class="field full"><label>Nome</label><input id="rNome" placeholder="Nome do responsável" value="${escapeHtml(editingTutor?.nome||'')}"></div>
+        <div class="field"><label>Telefone</label><input id="rTel" placeholder="(00) 00000-0000" value="${escapeHtml(editingTutor?.tel||'')}"></div>
+        <div class="field"><label>E-mail</label><input id="rEmail" type="email" value="${escapeHtml(editingTutor?.email||'')}"></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveTutor()">Salvar</button>';
+      break;
+    case 'animal':
+      editingAnimal=arg||null; title=editingAnimal?'Editar animal':'Novo animal';
+      body=`<div class="form-grid">
+        <div class="field full"><label>Nome do animal</label><input id="aNome" placeholder="Nome" value="${escapeHtml(editingAnimal?.nome||'')}"></div>
+        <div class="field"><label>Espécie</label><input id="aEsp" placeholder="Canina, felina..." value="${escapeHtml(editingAnimal?.especie||'')}"></div>
+        <div class="field"><label>Raça</label><input id="aRaca" placeholder="Raça" value="${escapeHtml(editingAnimal?.raca||'')}"></div>
+        <div class="field"><label>Responsável</label><input id="aTutor" list="tutorList" placeholder="Nome do responsável" value="${escapeHtml(editingAnimal?.tutor||'')}">${tutorList}</div>
+        <div class="field"><label>Peso (kg)</label><input id="aPeso" type="number" step="0.1" placeholder="0.0" value="${escapeHtml(editingAnimal?.peso||'')}"></div>
+        <div class="field full"><label>Observações de comportamento</label><textarea id="aComp" placeholder="Notas rápidas de comportamento">${escapeHtml(editingAnimal?.comportamento||'')}</textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveAnimal()">Salvar</button>';
+      break;
+    case 'consulta':
+      title='Nova consulta';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="cAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Responsável</label><input id="cResp" list="tutorList">${tutorList}</div>
+        <div class="field"><label>Data</label><input id="cData" type="date" value="${today}"></div>
+        <div class="field"><label>Hora</label><input id="cHora" type="time"></div>
+        <div class="field"><label>Tipo</label><select id="cTipo"><option>Consulta</option><option>Retorno</option><option>Avaliação comportamental</option><option>Emergência</option></select></div>
+        <div class="field"><label>Valor (R$)</label><input id="cValor" type="number" step="0.01" placeholder="0,00"></div>
+        <div class="field"><label>Status</label><select id="cStatus"><option>Agendada</option><option>Pago</option><option>Cancelada</option></select></div>
+        <div class="field"><label>Forma de pagamento</label><select id="cForma"><option value="">—</option><option>Dinheiro</option><option>Pix</option><option>Cartão</option><option>Outro</option></select></div>
+        <div class="field"><label>Peso (kg)</label><input id="cPeso" type="number" step="0.1"></div>
+        <div class="field"><label>Retorno sugerido</label><input id="cRetorno" type="date"></div>
+        <div class="field full"><label>Queixa / motivo</label><textarea id="cQueixa"></textarea></div>
+        <div class="field full"><label>Histórico / evolução</label><textarea id="cHistorico"></textarea></div>
+        <div class="field full"><label>Exame / observações clínicas</label><textarea id="cExame"></textarea></div>
+        <div class="field full"><label>Avaliação profissional</label><textarea id="cAvaliacao"></textarea></div>
+        <div class="field full"><label>Conduta / plano / orientações</label><textarea id="cPlano"></textarea></div>
+        <div class="field full"><label>Evolução comportamental</label><textarea id="cComportamento"></textarea></div>
+        <div class="field full"><label>Observações administrativas</label><textarea id="cObs"></textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveConsulta()">Salvar</button>';
+      break;
+    case 'prescricao':
+      title='Nova prescrição';
+      body=`<div class="form-grid">
+        <div class="field full"><label>Tipo de documento</label><select id="pTipo" onchange="toggleRxSpecialFields()">
+          <option value="comum">Receita comum</option>
+          <option value="controle">Receita de Controle Especial</option>
+          <option value="retencao">Receita sujeita à retenção</option>
+          <option value="notificacao-a-vet">Notificação de Receita A VET</option>
+          <option value="notificacao-b-vet">Notificação de Receita B VET</option>
+          <option value="notificacao-mapa-vet">Notificação de produto veterinário controlado (MAPA/SIPEAGRO)</option>
+          <option value="notificacao-a">Notificação de Receita A</option>
+          <option value="notificacao-b">Notificação de Receita B</option>
+          <option value="notificacao-b2">Notificação de Receita B2</option>
+          <option value="retinoides">Retinoides de uso sistêmico</option>
+          <option value="talidomida">Talidomida</option>
+          <option value="outro-especial">Outro (especial)</option>
+        </select></div></div>
+      <div id="commonRxPanel" style="margin-top:12px"><div class="form-grid">
+        <div class="field"><label>Data</label><input id="pDataCommon" type="date" value="${today}"></div>
+        <div class="field"><label>Animal</label><input id="pAnimalCommon" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Responsável</label><input id="pResponsavelCommon" list="tutorList">${tutorList}</div>
+        <div class="field"><label>Espécie</label><input id="pEspecieCommon"></div>
+        <div class="field"><label>Peso (kg)</label><input id="pPesoCommon" type="number" step="0.1"></div>
+        <div class="field full"><label>Medicamento</label><input id="pMedCommon"></div>
+        <div class="field"><label>Princípio ativo / composição</label><input id="pAtivoCommon"></div>
+        <div class="field"><label>Concentração</label><input id="pConcCommon"></div>
+        <div class="field"><label>Quantidade</label><input id="pQtdCommon"></div>
+        <div class="field"><label>Unidade</label><input id="pUnidCommon" placeholder="comprimidos, ml..."></div>
+        <div class="field"><label>Via</label><input id="pViaCommon" placeholder="Oral, tópica..."></div>
+        <div class="field"><label>Posologia</label><input id="pFreqCommon"></div>
+        <div class="field"><label>Duração</label><input id="pDurCommon"></div>
+        <div class="field"><label>Administração</label><input id="pAdmCommon"></div>
+        <div class="field full"><label>Orientações ao responsável</label><textarea id="pInstCommon"></textarea></div>
+        <div class="field full"><label>Advertências / observações</label><textarea id="pObsCommon"></textarea></div>
+        <div class="field"><label>Endereço da clínica</label><input id="pEnderecoCommon"></div>
+        <div class="field"><label>Contato</label><input id="pContatoCommon"></div>
+      </div></div>
+      <div id="specialRxPanel" style="margin-top:12px;display:none">
+        <div class="special-banner"><div>⚠️</div><div id="specialTypeHint">Confira o modelo oficial vigente.</div></div>
+        <div class="form-grid">
+        <div class="field"><label>Data</label><input id="pData" type="date" value="${today}"></div>
+        <div class="field"><label>Nº do documento</label><input id="pNumero"></div>
+        <div class="field"><label>Animal</label><input id="pAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Espécie</label><input id="pEspecie"></div>
+        <div class="field"><label>Raça</label><input id="pRaca"></div>
+        <div class="field"><label>Porte</label><input id="pPorte"></div>
+        <div class="field"><label>Peso (kg)</label><input id="pPeso" type="number" step="0.1"></div>
+        <div class="field"><label>Responsável pelo animal</label><input id="pResponsavel" list="tutorList">${tutorList}</div>
+        <div class="field"><label>Documento do responsável</label><input id="pDocResp"></div>
+        <div class="field"><label>Endereço do responsável</label><input id="pEndResp"></div>
+        <div class="field"><label>Telefone do responsável</label><input id="pTelResp"></div>
+        <div class="field"><label>Comprador</label><input id="pComprador"></div>
+        <div class="field"><label>Documento do comprador</label><input id="pDocComprador"></div>
+        <div class="field"><label>Endereço do comprador</label><input id="pEndComprador"></div>
+        <div class="field"><label>Telefone do comprador</label><input id="pTelComprador"></div>
+        <div class="field full"><label>Medicamento / substância</label><input id="pMed"></div>
+        <div class="field"><label>Concentração</label><input id="pConc"></div>
+        <div class="field"><label>Forma farmacêutica</label><input id="pForma"></div>
+        <div class="field"><label>Quantidade</label><input id="pQtd"></div>
+        <div class="field"><label>Posologia</label><input id="pFreq"></div>
+        <div class="field full"><label>Observações</label><textarea id="pObs"></textarea></div>
+        <div class="field"><label>Médica-veterinária</label><input id="pEmitente" value="Natalia Martins Hoffmann"></div>
+        <div class="field"><label>CRMV/SC</label><input id="pCrmv" value="07725"></div>
+        <div class="field"><label>Endereço da clínica</label><input id="pEndereco"></div>
+        <div class="field"><label>Contato</label><input id="pContato"></div>
+      </div></div>`;
+      foot+='<button class="btn primary" onclick="saveRx()">Salvar</button><button class="btn blue" onclick="saveRx(true)">Salvar e imprimir</button>'; 
+      break;
+    case 'triagem': {
+      const triggers=['Visitas','Barulhos altos','Outros animais','Crianças','Manuseio/toque','Transporte','Isolamento/solidão','Desconhecidos','Objetos específicos','Mudança de rotina'];
+      title='Nova triagem comportamental';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="tAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Data</label><input id="tData" type="date" value="${today}"></div>
+        <div class="field"><label>Nível de risco</label><select id="tRisco"><option>Baixo</option><option>Moderado</option><option>Alto</option></select></div>
+        <div class="field"><label>Intensidade (1-5)</label><input id="tInt" type="number" min="1" max="5" value="3"></div>
+        <div class="field full"><label>Queixa principal (palavras do responsável)</label><textarea id="tQueixa"></textarea></div>
+        <div class="field full"><label>Gatilhos observados</label><div class="chips" id="chips">${triggers.map(t=>`<span class="chip" onclick="this.classList.toggle('on')">${escapeHtml(t)}</span>`).join('')}</div></div>
+        <div class="field full"><label>Sinais de alerta / risco</label><textarea id="tAlert"></textarea></div>
+        <div class="field full"><label>Contexto / ambiente</label><textarea id="tContexto"></textarea></div>
+        <div class="field full"><label>Antecedente</label><textarea id="tAnte"></textarea></div>
+        <div class="field full"><label>Comportamento</label><textarea id="tBeh"></textarea></div>
+        <div class="field full"><label>Consequência</label><textarea id="tCons"></textarea></div>
+        <div class="field full"><label>Objetivo da triagem</label><textarea id="tObj"></textarea></div>
+        <div class="field full"><label>Hipóteses / formulação clínica</label><textarea id="tForm"></textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveTriage()">Salvar</button>';
+      break;
+    }
+    case 'prontuario': {
+      title='Registro de prontuário';
+      const selectedAnimal=getAnimalByReference(arg)||state.animais.find(x=>String(x.id)===String(currentPatientId)&&x.nome===arg);const p=arg?getRecord(selectedAnimal?.id||arg):null;
+      const v=k=>p?escapeHtml(p[k]||''):'';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="prAnimal" list="animalList" value="${p?escapeHtml(p.animal):escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Responsável</label><input id="prResp" list="tutorList" value="${v('responsavel')}">${tutorList}</div>
+        <div class="field"><label>Espécie</label><input id="prEsp" value="${v('especie')}"></div>
+        <div class="field"><label>Raça</label><input id="prRaca" value="${v('raca')}"></div>
+        <div class="field"><label>Sexo</label><select id="prSexo"><option value="">—</option><option${p&&p.sexo==='Macho'?' selected':''}>Macho</option><option${p&&p.sexo==='Fêmea'?' selected':''}>Fêmea</option></select></div>
+        <div class="field"><label>Nascimento</label><input id="prNasc" type="date" value="${v('nascimento')}"></div>
+        <div class="field"><label>Microchip</label><input id="prChip" value="${v('microchip')}"></div>
+        <div class="field"><label>Castrado</label><select id="prCast"><option value="">—</option><option${p&&p.castrado==='Sim'?' selected':''}>Sim</option><option${p&&p.castrado==='Não'?' selected':''}>Não</option></select></div>
+        <div class="field"><label>Peso (kg)</label><input id="prPeso" value="${v('peso')}"></div>
+        <div class="field full"><label>Alergias</label><textarea id="prAlergias">${v('alergias')}</textarea></div>
+        <div class="field full"><label>Doenças/condições relevantes</label><textarea id="prDoencas">${v('doencas')}</textarea></div>
+        <div class="field full"><label>Medicações atuais</label><textarea id="prMeds">${v('medicacoes')}</textarea></div>
+        <div class="field full"><label>Cirurgias/procedimentos</label><textarea id="prCirurgias">${v('cirurgias')}</textarea></div>
+        <div class="field full"><label>Vacinas/medidas preventivas</label><textarea id="prVacinas">${v('vacinas')}</textarea></div>
+        <div class="field full"><label>Queixa principal</label><textarea id="prQueixa">${v('queixa')}</textarea></div>
+        <div class="field full"><label>Histórico do problema/atendimento</label><textarea id="prHistorico">${v('historico')}</textarea></div>
+        <div class="field full"><label>Exame / achados</label><textarea id="prExame">${v('exame')}</textarea></div>
+        <div class="field full"><label>Avaliação profissional</label><textarea id="prAvaliacao">${v('avaliacao')}</textarea></div>
+        <div class="field full"><label>Conduta / plano</label><textarea id="prConduta">${v('conduta')}</textarea></div>
+        <div class="field full"><label>Observações</label><textarea id="prObs">${v('observacoes')}</textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveRecord()">Salvar</button>';
+      break;
+    }
+    case 'plano':
+      title='Novo plano de intervenção';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="plAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Data</label><input id="plData" type="date" value="${today}"></div>
+        <div class="field"><label>Status</label><select id="plStatus"><option>Ativo</option><option>Concluído</option><option>Pausado</option></select></div>
+        <div class="field"><label>Reavaliação prevista</label><input id="plReav" type="date"></div>
+        <div class="field full"><label>Objetivo</label><textarea id="plObjetivo"></textarea></div>
+        <div class="field full"><label>Comportamento-alvo</label><textarea id="plAlvo"></textarea></div>
+        <div class="field full"><label>Metas mensuráveis</label><textarea id="plMetas"></textarea></div>
+        <div class="field full"><label>Manejo ambiental</label><textarea id="plManejo"></textarea></div>
+        <div class="field full"><label>Treino / protocolo</label><textarea id="plTreino"></textarea></div>
+        <div class="field full"><label>Enriquecimento ambiental</label><textarea id="plEnriq"></textarea></div>
+        <div class="field full"><label>Orientações ao responsável</label><textarea id="plOrient"></textarea></div>
+        <div class="field full"><label>Segurança / manejo de risco</label><textarea id="plSeg"></textarea></div>
+        <div class="field full"><label>Observações</label><textarea id="plObs"></textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="savePlan()">Salvar</button>';
+      break;
+    case 'evolucao':
+      title='Registrar evolução';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="evAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Data</label><input id="evData" type="date" value="${today}"></div>
+        <div class="field"><label>Período avaliado</label><input id="evPeriodo" placeholder="Ex.: últimas 2 semanas"></div>
+        <div class="field"><label>Adesão ao plano (%)</label><input id="evAdesao" type="number" min="0" max="100"></div>
+        <div class="field"><label>Frequência do comportamento</label><input id="evFreq" type="number" step="0.1"></div>
+        <div class="field"><label>Intensidade (1-5)</label><input id="evInt" type="number" min="1" max="5"></div>
+        <div class="field full"><label>Mudanças observadas</label><textarea id="evMudancas"></textarea></div>
+        <div class="field full"><label>Resposta ao protocolo</label><textarea id="evResposta"></textarea></div>
+        <div class="field full"><label>Riscos identificados</label><textarea id="evRiscos"></textarea></div>
+        <div class="field full"><label>Ajustes no plano</label><textarea id="evAjustes"></textarea></div>
+        <div class="field"><label>Próxima reavaliação</label><input id="evReav" type="date"></div>
+        <div class="field full"><label>Relato do responsável</label><textarea id="evResp"></textarea></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveEvolution()">Salvar</button>';
+      break;
+    case 'pagamento':
+      title='Lançar pagamento';
+      body=`<div class="form-grid">
+        <div class="field"><label>Animal</label><input id="fAnimal" list="animalList" value="${escapeHtml(arg||'')}">${animalList}</div>
+        <div class="field"><label>Data</label><input id="fData" type="date" value="${today}"></div>
+        <div class="field"><label>Valor (R$)</label><input id="fValor" type="number" step="0.01"></div>
+        <div class="field"><label>Serviço</label><input id="fServico" placeholder="Consulta, retorno..."></div>
+        <div class="field"><label>Status</label><select id="fStatus"><option>Pago</option><option>Pendente</option></select></div>
+        <div class="field"><label>Forma de pagamento</label><select id="fForma"><option value="">—</option><option>Dinheiro</option><option>Pix</option><option>Cartão</option><option>Outro</option></select></div>
+      </div>`;
+      foot+='<button class="btn primary" onclick="saveFinance()">Salvar</button>';
+      break;
+    default:
+      title='Em breve';
+      body='<div class="sub">Este formulário ainda não foi implementado.</div>';
+  }
+  modal(title,body,foot);
+}
+function cloneState(){return JSON.parse(JSON.stringify(state))}
+function getAnimalByReference(ref){const byId=state.animais.find(a=>String(a.id)===String(ref));if(byId)return byId;const matches=state.animais.filter(a=>String(a.nome).trim().toLocaleLowerCase()===String(ref||'').trim().toLocaleLowerCase());return matches.length===1?matches[0]:null}
+function animalRecordMatches(record,ref){const animal=getAnimalByReference(ref);if(!animal)return false;if(record.animalId)return String(record.animalId)===String(animal.id);const sameName=state.animais.filter(a=>a.nome===animal.nome);return sameName.length===1&&record.animal===animal.nome}
+function newId(prefix){return prefix+'-'+(crypto.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2))}
+function stableLegacyId(kind,obj,index){let value=JSON.stringify(obj);let h=2166136261;for(let i=0;i<value.length;i++){h^=value.charCodeAt(i);h=Math.imul(h,16777619)}return kind+'-legacy-'+(h>>>0).toString(36)+'-'+index}
+function migrateClinicalLinks(){const arrays=Object.keys(state);for(const key of arrays){const list=state[key];if(!Array.isArray(list))continue;const seen=new Map();list.forEach((r,i)=>{if(!r.id){const base=stableLegacyId(key,r,i),n=seen.get(base)||0;seen.set(base,n+1);r.id=n?base+'-'+n:base}})}
+ const byName=(list,name)=>{const n=String(name||'').trim().toLocaleLowerCase();return n?list.filter(x=>String(x.nome||'').trim().toLocaleLowerCase()===n):[]};
+ state.animais.forEach(a=>{if(!a.tutorId){const matches=byName(state.tutores,a.tutor);if(matches.length===1)a.tutorId=matches[0].id}});
+ const recordArrays=['consultas','casos','prescricoes','financeiro','prontuarios','planos','evolucoes'];recordArrays.forEach(key=>state[key].forEach(r=>{if(!r.animalId){const matches=byName(state.animais,r.animal);if(matches.length===1)r.animalId=matches[0].id}if(!r.tutorId){const name=r.responsavel||r.tutor;if(name){const matches=byName(state.tutores,name);if(matches.length===1)r.tutorId=matches[0].id}}}));
+ state.prontuarios.forEach(p=>{const a=state.animais.find(x=>x.id===p.animalId);if(a)p.animal=a.nome});
+ state.animais.forEach(a=>{if(a.tutorId){const t=state.tutores.find(x=>x.id===a.tutorId);if(t)a.tutor=t.nome}});
+ recordArrays.forEach(key=>state[key].forEach(r=>{if(r.animalId){const a=state.animais.find(x=>x.id===r.animalId);if(a)r.animal=a.nome}if(r.tutorId){const t=state.tutores.find(x=>x.id===r.tutorId);if(t&&('responsavel'in r))r.responsavel=t.nome}}));
+}
+function unlinkedClinicalRecords(){const out=[];state.animais.forEach(a=>{if(a.tutor&&!a.tutorId)out.push({kind:'animais',field:'tutorId',id:a.id,name:a.tutor,label:'Responsável'})});['consultas','casos','prescricoes','financeiro','prontuarios','planos','evolucoes'].forEach(k=>state[k].forEach(r=>{if(r.animal&&!r.animalId&&r.animal!=='—')out.push({kind:k,field:'animalId',id:r.id,name:r.animal,label:'Animal'});if((r.responsavel||r.tutor)&&!r.tutorId)out.push({kind:k,field:'tutorId',id:r.id,name:r.responsavel||r.tutor,label:'Responsável'})}));return out}
+function renderUnlinkedRecords(){const box=$('unlinkedRecords');if(!box)return;const list=unlinkedClinicalRecords();box.innerHTML=list.length?list.map(r=>{const tutors=r.field==='tutorId',targets=tutors?state.tutores:state.animais;return `<div class="backup-row"><span><b>${escapeHtml(r.name)}</b> · ${escapeHtml(r.kind)} · ${escapeHtml(r.label)} · ID ${escapeHtml(r.id)}</span><span><select id="resolve-${escapeHtml(r.kind)}-${escapeHtml(r.id)}-${r.field}"><option value="">Escolher ${tutors?'responsável':'animal'}…</option>${targets.map(a=>`<option value="${escapeHtml(a.id)}">${escapeHtml(a.nome)}${tutors?'':` · ${escapeHtml(a.especie||'')}`}</option>`).join('')}</select><button class="btn" onclick="resolveClinicalLink('${r.kind}','${r.id}','${r.field}')">Vincular</button></span></div>`}).join(''):'<div class="sub">Todos os vínculos clínicos estão associados por ID.</div>'}
+function resolveClinicalLink(kind,id,field){const sel=$('resolve-'+kind+'-'+id+'-'+field),record=state[kind]?.find(r=>String(r.id)===String(id)),target=(field==='tutorId'?state.tutores:state.animais).find(r=>String(r.id)===String(sel?.value));if(!record||!target)return toast('Selecione o cadastro correto para este vínculo.');downloadJson('lia-hoff-backup-pre-vinculo-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json',{exportedAt:new Date().toISOString(),state:cloneState()});record[field]=target.id;if(field==='animalId')record.animal=target.nome;else if('responsavel'in record)record.responsavel=target.nome;else record.tutor=target.nome;persistState();renderAll();toast('Vínculo corrigido usando o ID do cadastro.')}
+function presentCloudConflict(local,cloud,revision){conflictSnapshot={local,cloud,revision};const localN=Object.values(local).filter(Array.isArray).reduce((n,a)=>n+a.length,0),cloudN=Object.values(cloud).filter(Array.isArray).reduce((n,a)=>n+a.length,0);modal('Conflito de sincronização',`<div class="alert yellow">Este dispositivo e o Firebase têm alterações diferentes. Nenhuma versão foi sobrescrita. Antes de escolher, serão baixados backups completos das duas versões.</div><p><b>Este dispositivo:</b> ${localN} registros<br><b>Firebase:</b> ${cloudN} registros<br><b>Versão atual da nuvem:</b> ${revision}</p><p class="sub">Mesclar une registros por ID e mantém a versão com a data de alteração mais recente quando o mesmo registro mudou nos dois dispositivos.</p>`,`<button class="btn" onclick="closeModal()">Decidir depois</button><button class="btn" onclick="resolveCloudConflict('cloud')">Usar Firebase</button><button class="btn" onclick="resolveCloudConflict('local')">Usar este dispositivo</button><button class="btn primary" onclick="resolveCloudConflict('merge')">Mesclar versões</button>`);const box=$('syncStatusBox');if(box)box.innerHTML='<b>Conflito pendente.</b> A sincronização está pausada.<br><button class="btn" style="margin-top:8px" onclick="reviewCloudConflict()">Revisar conflito</button>'}
+function reviewCloudConflict(){if(conflictSnapshot)presentCloudConflict(conflictSnapshot.local,conflictSnapshot.cloud,conflictSnapshot.revision)}
+function mergeStates(local,cloud){const merged={};Object.keys(state).forEach(key=>{if(!Array.isArray(state[key]))return;const byId=new Map();(cloud[key]||[]).forEach(r=>byId.set(String(r.id),r));(local[key]||[]).forEach(r=>{const id=String(r.id),old=byId.get(id);if(!old||recordTime(r)>=recordTime(old))byId.set(id,r)});merged[key]=[...byId.values()]});return merged}
+function recordTime(r){return Date.parse(r.updatedAt||r.createdAt||r.data||'')||0}
+function adoptSyncedState(next,revision){Object.keys(state).forEach(k=>state[k]=Array.isArray(next[k])?next[k]:[]);migrateClinicalLinks();cloudRevision=revision;localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll()}
+function migrateSnapshot(snapshot){const before=cloneState();Object.keys(state).forEach(k=>state[k]=Array.isArray(snapshot[k])?JSON.parse(JSON.stringify(snapshot[k])):[]);migrateClinicalLinks();const migrated=cloneState();Object.keys(state).forEach(k=>state[k]=before[k]);return migrated}
+function setCloudRevision(revision){cloudRevision=Number(revision)||0}
+window.migrateSnapshot=migrateSnapshot;window.adoptSyncedState=adoptSyncedState;window.setCloudRevision=setCloudRevision;
+async function resolveCloudConflict(choice){if(!conflictSnapshot)return;const local=cloneState(),cloud=conflictSnapshot.cloud,rev=conflictSnapshot.revision;downloadJson('lia-hoff-conflito-local-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json',{exportedAt:new Date().toISOString(),state:local});downloadJson('lia-hoff-conflito-firebase-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json',{exportedAt:new Date().toISOString(),state:cloud});const chosen=window.migrateSnapshot?.(choice==='cloud'?cloud:choice==='merge'?mergeStates(local,cloud):local)|| (choice==='cloud'?cloud:choice==='merge'?mergeStates(local,cloud):local);try{const newRevision=await window.firebaseBridge.finishConflict(choice,chosen,rev);Object.keys(state).forEach(k=>state[k]=Array.isArray(chosen[k])?chosen[k]:[]);cloudRevision=newRevision;conflictSnapshot=null;localStorage.setItem(STORAGE_KEY,JSON.stringify(state));closeModal();renderAll();toast(choice==='merge'?'Versões mescladas e sincronizadas.':'Conflito resolvido; cópias das duas versões foram baixadas.')}catch(e){await window.firebaseBridge.refreshConflict(local);toast('A nuvem mudou durante a resolução. Revise o conflito atualizado antes de continuar.')}}
+function loadLocalState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return;const saved=JSON.parse(raw);Object.keys(state).forEach(k=>{if(Array.isArray(saved[k]))state[k]=saved[k]});migrateClinicalLinks();persistState()}catch(e){console.warn('Falha ao carregar dados locais',e)}}
+function syncRecordPayload(record){return JSON.stringify(Object.keys(record||{}).filter(k=>k!=='updatedAt').sort().map(k=>[k,record[k]]))}
+function stampChangedRecords(previous){const now=new Date().toISOString();for(const [key,list] of Object.entries(state)){if(!Array.isArray(list))continue;const oldById=new Map((Array.isArray(previous?.[key])?previous[key]:[]).map(r=>[String(r.id),r]));for(const record of list){const old=oldById.get(String(record.id));if(!old||syncRecordPayload(record)!==syncRecordPayload(old))record.updatedAt=now}}}
+function persistState(){migrateClinicalLinks();let previous=null;try{const raw=localStorage.getItem(STORAGE_KEY);if(raw)previous=JSON.parse(raw)}catch(e){console.warn('Não foi possível comparar a versão local anterior',e)}stampChangedRecords(previous);try{const old=localStorage.getItem(STORAGE_KEY);if(old)localStorage.setItem(STORAGE_BACKUP_KEY,old);localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){console.warn('Falha ao salvar localmente',e);toast('Não foi possível salvar no navegador. Exporte um backup e libere espaço.')}clearTimeout(persistTimer);persistTimer=setTimeout(()=>{if(window.firebaseBridge?.isConnected())window.firebaseBridge.save(cloneState(),cloudRevision)},500);renderUnlinkedRecords();updateSyncUI()}
+function updateSyncUI(){const pill=$('syncPill'),txt=$('syncText'),box=$('syncStatusBox'),user=$('fbUserStatus');if(!pill||!txt)return;const connected=window.firebaseBridge?.isConnected?.()||false,configured=!!getFirebaseConfig();pill.className='sync-pill '+(connected?'ok':configured?'warn':'');txt.textContent=connected?'Sincronizado':conflictSnapshot?'Conflito pendente':configured?'Firebase configurado':'Local';if(box)box.innerHTML=conflictSnapshot?'<b>Conflito pendente.</b> A sincronização está pausada.<br><button class="btn" style="margin-top:8px" onclick="reviewCloudConflict()">Revisar conflito</button>':connected?'<b>Sincronização ativa.</b> Conflitos de versão são detectados antes de gravar na nuvem.':configured?'<b>Firebase configurado.</b> Ainda não há uma sessão autenticada neste dispositivo.':'<b>Modo local.</b> Os dados ficam neste navegador e uma cópia da versão anterior é mantida automaticamente.';if(user&&connected)user.textContent='Conectado como '+(window.firebaseBridge.userEmail?.()||'usuário autenticado')+'.'}
+function getFirebaseConfig(){try{return JSON.parse(localStorage.getItem(FIREBASE_CONFIG_KEY)||'null')}catch(e){return null}}
+function saveFirebaseConfig(){const c={apiKey:$('fbApiKey')?.value.trim(),authDomain:$('fbAuthDomain')?.value.trim(),projectId:$('fbProjectId')?.value.trim(),storageBucket:$('fbStorageBucket')?.value.trim(),messagingSenderId:$('fbMessagingSenderId')?.value.trim(),appId:$('fbAppId')?.value.trim()};if(!Object.values(c).every(Boolean))return toast('Preencha toda a configuração do Firebase.');localStorage.setItem(FIREBASE_CONFIG_KEY,JSON.stringify(c));return c}
+function fillFirebaseConfig(){const c=getFirebaseConfig();if(!c)return;Object.entries(c).forEach(([k,v])=>{const el=$('fb'+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=v})}
+function exportBackup(){downloadJson('lia-hoff-backup-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json',{app:'Lia Hoff',version:'4.0',exportedAt:new Date().toISOString(),profissional:'Natalia Martins Hoffmann — CRMV-SC 07725',estabelecimento:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',state:cloneState()});toast('Backup completo exportado.')}
+function backupCurrent(label){downloadJson('lia-hoff-'+label+'-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json',{app:'Lia Hoff',exportedAt:new Date().toISOString(),state:cloneState()})}
+function importBackup(){const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=()=>{const file=input.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(!data.state||!Array.isArray(data.state.animais)||!Array.isArray(data.state.tutores))throw new Error('Formato inválido');if(!confirm('Importar este arquivo vai substituir os dados locais. Será baixada uma cópia de segurança do estado atual. Continuar?'))return;backupCurrent('backup-antes-importacao');Object.keys(state).forEach(k=>{state[k]=Array.isArray(data.state[k])?data.state[k]:[]});migrateClinicalLinks();persistState();renderAll();toast('Backup importado para este dispositivo.')}catch(e){toast(e.message==='Formato inválido'?'Este arquivo não parece ser um backup Lia Hoff.':'Não foi possível importar este backup.')}};reader.readAsText(file)};input.click()}
+function restorePreviousBackup(){const raw=localStorage.getItem(STORAGE_BACKUP_KEY);if(!raw)return toast('Ainda não existe uma cópia anterior neste navegador.');if(!confirm('Restaurar o estado salvo antes da última gravação? O estado atual será baixado como backup.'))return;backupCurrent('backup-antes-restauracao');try{const previous=JSON.parse(raw);Object.keys(state).forEach(k=>state[k]=Array.isArray(previous[k])?previous[k]:[]);migrateClinicalLinks();localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll();toast('Cópia anterior restaurada localmente.')}catch(e){toast('A cópia local anterior não pôde ser lida.') }}
+function clearLocalData(){if(!confirm('Isso apagará apenas os dados salvos neste navegador. Será baixado um backup antes da limpeza. Se houver Firebase conectado, os dados da nuvem não serão apagados. Continuar?'))return;backupCurrent('backup-antes-limpeza');Object.keys(state).forEach(k=>state[k]=[]);localStorage.removeItem(STORAGE_KEY);renderAll();toast('Dados locais limpos.')}
+function connectFirebase(){const c=saveFirebaseConfig();if(!c)return;const email=$('fbEmail').value.trim(),password=$('fbPassword').value;if(!email||!password)return toast('Informe e-mail e senha para conectar.');if(!window.firebaseBridge)return toast('O módulo Firebase ainda está carregando. Tente novamente em alguns segundos.');window.firebaseBridge.connect(c,email,password).then(msg=>toast(msg)).catch(err=>toast(err.message||'Falha ao conectar ao Firebase.'))}
+function createFirebaseAccount(){const c=saveFirebaseConfig();if(!c)return;const email=$('fbEmail').value.trim(),password=$('fbPassword').value;if(!email||password.length<6)return toast('Informe e-mail e uma senha com pelo menos 6 caracteres.');if(!window.firebaseBridge)return toast('O módulo Firebase ainda está carregando.');window.firebaseBridge.createAccount(c,email,password).then(msg=>toast(msg)).catch(err=>toast(err.message||'Falha ao criar acesso.'))}
+function signOutFirebase(){if(window.firebaseBridge?.signOut)window.firebaseBridge.signOut().then(()=>toast('Sessão encerrada.'));else toast('Nenhuma sessão Firebase ativa.')}
+function printRxPage(){var el=$('rxPrint');if(!el)return toast('Não há documento para imprimir.');var w=window.open('','','width=900,height=1000');if(!w)return toast('Permita pop-ups para imprimir a receita.');var css='<style>@page{size:A4;margin:15mm}body{font-family:Arial,sans-serif;margin:0;color:#263b45;background:#fff}.print-area{max-width:780px;margin:auto}.rx-head{display:flex;justify-content:space-between;border-bottom:2px solid #07588f;padding-bottom:14px}.rx-section{margin-top:18px}.rx-line{border-bottom:1px solid #ddd;padding:9px 0}.rx-footer{margin-top:45px;text-align:center;border-top:1px solid #ccc;padding-top:15px;font-size:12px;color:#667}.rx-signature{margin:55px auto 0;text-align:center;max-width:340px;border-top:1px solid #263b45;padding-top:8px}.rx-meta{font-size:12px;color:#5f6e73;line-height:1.55}.special-banner{background:#eef6fb;border:1px solid #cfe1ec;color:#234d64;padding:12px;border-radius:10px;margin:12px 0}.special-title{font-weight:800;color:#07588f;font-size:15px}</style>';w.document.write('<html><head><meta charset="utf-8"><title>Receituário — Natalia Martins Hoffmann — CRMV-SC 07725</title>'+css+'</head><body>'+el.outerHTML+'</body></html>');w.document.close();w.onload=function(){w.print()}}
+function getBackupMeta(){try{return JSON.parse(localStorage.getItem('lia-hoff-rx-backup-meta-v1')||'{}')}catch(e){return {}}}
+function setBackupMeta(m){localStorage.setItem('lia-hoff-rx-backup-meta-v1',JSON.stringify(m))}
+function downloadJson(filename,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+function prescriptionsSince(iso){return state.prescricoes.filter(r=>!iso||new Date(r.createdAt||r.data+'T12:00:00')>new Date(iso))}
+function backupNewPrescriptions(){const meta=getBackupMeta(),items=prescriptionsSince(meta.lastBackupAt);if(!items.length)return toast('Não há novas prescrições desde o último backup mensal.');const now=new Date(),stamp=now.toISOString().slice(0,10),payload={sistema:'Lia Hoff — Comportamento e Bem-estar Animal',profissional:'Natalia Martins Hoffmann — CRMV-SC 07725',estabelecimento:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',tipo:'backup-mensal-prescricoes',geradoEm:now.toISOString(),periodoDesde:meta.lastBackupAt||null,guardaMinimaAnos:5,registros:items};downloadJson(`lia-hoff-prescricoes-${stamp}.json`,payload);const hist=Array.isArray(meta.history)?meta.history:[];hist.unshift({data:stamp,quantidade:items.length,arquivo:`lia-hoff-prescricoes-${stamp}.json`});setBackupMeta({lastBackupAt:now.toISOString(),history:hist.slice(0,24)});renderBackupStatus();toast(`Backup mensal gerado com ${items.length} nova(s) prescrição(ões).`)}
+function backupAllPrescriptions(){const now=new Date(),stamp=now.toISOString().slice(0,10),payload={sistema:'Lia Hoff — Comportamento e Bem-estar Animal',profissional:'Natalia Martins Hoffmann — CRMV-SC 07725',estabelecimento:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',tipo:'backup-completo-prescricoes',geradoEm:now.toISOString(),guardaMinimaAnos:5,registros:state.prescricoes};downloadJson(`lia-hoff-prescricoes-completo-${stamp}.json`,payload);toast(`Backup completo gerado com ${state.prescricoes.length} prescrição(ões).`)}
+function renderBackupStatus(){const meta=getBackupMeta(),items=prescriptionsSince(meta.lastBackupAt),status=$('backupStatus'),msg=$('backupMessage'),hist=$('backupHistory');if(!status)return;status.className='badge '+(items.length?'orange':'green');status.textContent=items.length?`${items.length} nova(s) pendente(s)`:'Em dia';if(msg)msg.innerHTML=items.length?`<b>Backup mensal pendente:</b> ${items.length} nova(s) prescrição(ões) desde ${meta.lastBackupAt?new Date(meta.lastBackupAt).toLocaleDateString('pt-BR'):'o início'}.`:'<b>Backup mensal em dia.</b> O próximo lembrete aparecerá quando houver novas prescrições.';if(hist)hist.innerHTML=(meta.history||[]).slice(0,6).map(h=>`<div class="backup-row"><span><b>${h.data}</b> · ${h.quantidade} registro(s)</span><span>${h.arquivo}</span></div>`).join('')||'<div class="sub">Nenhum backup mensal registrado ainda.</div>'}
+function monthlyBackupCheck(){renderBackupStatus();const meta=getBackupMeta(),now=new Date();if(meta.lastReminderMonth!==`${now.getFullYear()}-${now.getMonth()+1}`){const pending=prescriptionsSince(meta.lastBackupAt);if(pending.length){toast(`Backup mensal pendente: ${pending.length} nova(s) prescrição(ões).`);setBackupMeta({...meta,lastReminderMonth:`${now.getFullYear()}-${now.getMonth()+1}`})}}}
+function renderAll(){renderAnimals();renderTutors();renderAgenda();renderConsultas();renderRetornos();renderCases();renderBehaviorEvolution();renderFinance();renderRecords();renderHistory();renderPrescriptionList();renderRiskChart();renderUnlinkedRecords();$('statAnimals').textContent=state.animais.filter(a=>!a.archived).length;$('statCases').textContent=state.casos.length;$('caseCount').textContent=state.casos.length;$('triageCount').textContent=state.casos.length;$('planCount').textContent=state.planos.filter(p=>p.status==='Ativo').length;$('reevalCount').textContent=state.planos.filter(p=>p.reavaliacao).length;$('rxCount').textContent=state.prescricoes.length;$('rxSpecialCount').textContent=state.prescricoes.filter(r=>r.especial).length;renderBackupStatus();updateSyncUI()}
+function renderPrescriptionList(){const b=$('prescriptionsTable');if(!b)return;const q=($('rxSearch')?.value||'').trim().toLocaleLowerCase(),rows=state.prescricoes.filter(r=>[r.animal,r.responsavel,r.med,r.tipo,r.data].join(' ').toLocaleLowerCase().includes(q)).slice().sort((a,c)=>String(c.data).localeCompare(String(a.data)));b.innerHTML=rows.length?rows.map(r=>`<tr><td>${escapeHtml(r.data||'—')}</td><td>${escapeHtml(r.animal)}</td><td>${escapeHtml(r.med||'—')}</td><td>${r.especial?'Especial':'Comum'}</td><td><button class="btn" onclick="viewRxById('${r.id}')">Abrir</button> <button class="btn primary" onclick="printPrescriptionById('${r.id}')">Imprimir</button></td></tr>`).join(''):`<tr><td colspan="5">${state.prescricoes.length?'Nenhuma prescrição corresponde à busca.':'Nenhuma prescrição registrada.'}</td></tr>`}
+function viewRxById(id){const rx=state.prescricoes.find(x=>String(x.id)===String(id));if(rx)showPrescription(rx)}
+function printPrescriptionById(id){const rx=state.prescricoes.find(x=>String(x.id)===String(id));if(!rx)return;if(rx.especial&&!confirm('Este registro especial não substitui o modelo oficial vigente nem a emissão exigida pelo fluxo sanitário. Deseja abrir a visualização para impressão mesmo assim?'))return;showPrescription(rx);printRx()}
+function renderRiskChart(){const box=$('riskChart');if(!box)return;const levels=['Baixo','Moderado','Alto'],colors=['#55a782','#e0a13a','#d76666'],counts=levels.map(x=>state.casos.filter(c=>c.risco===x).length),max=Math.max(1,...counts);box.innerHTML=levels.map((x,i)=>`<div class="bar" style="height:${Math.max(18,counts[i]/max*100)}%;background:${colors[i]}"><span>${counts[i]}</span><label>${x}</label></div>`).join('')}
+function renderRecords(){let b=$('recordsTable');if(!b)return;if(!state.prontuarios.length){b.innerHTML='<tr><td colspan="6">Nenhum prontuário iniciado.</td></tr>';return}b.innerHTML=state.prontuarios.map(p=>{let a=state.animais.find(x=>x.nome===p.animal)||{};let n=state.consultas.filter(x=>x.animal===p.animal).length;let c=state.casos.filter(x=>x.animal===p.animal).length;return `<tr><td><b>${escapeHtml(p.animal)}</b><br><span class="sub">${escapeHtml(a.especie||p.especie||'—')} · ${escapeHtml(a.raca||p.raca||'—')}</span></td><td>${escapeHtml(p.responsavel||a.tutor||'—')}</td><td>${escapeHtml(p.updatedAt?new Date(p.updatedAt).toLocaleDateString('pt-BR'):'—')}</td><td>${n}</td><td>${c?`<span class="badge orange">${c} caso(s)</span>`:'—'}</td><td><button class="btn" onclick="openPatientChart('${String(p.animal).replace(/'/g,"\\'")}')">Abrir</button></td></tr>`}).join('')}
+function historyEvents(){
+  const ev=[];
+  state.consultas.forEach(c=>ev.push({id:'consulta-'+c.id,animal:c.animal,data:c.data||'',hora:c.hora||'',tipo:'Consulta',titulo:c.tipo||'Consulta',texto:[c.queixa,c.avaliacao,c.plano].filter(Boolean).join(' · '),responsavel:c.responsavel,action:`viewConsulta('${String(c.id).replace(/'/g,"\\'")}')`}));
+  state.casos.forEach(c=>ev.push({id:'caso-'+c.id,animal:c.animal,data:c.data||'',tipo:'Comportamento',titulo:'Triagem comportamental',texto:c.queixa||c.comportamento||c.formulacao||'',responsavel:c.responsavel,action:`viewCase('${String(c.id).replace(/'/g,"\\'")}')`}));
+  state.planos.forEach(x=>ev.push({id:'plano-'+x.id,animal:x.animal,data:x.data||'',tipo:'Plano',titulo:'Plano de intervenção',texto:x.objetivo||x.metas||'',responsavel:'',action:`openCaseFor('${String(x.animal).replace(/'/g,"\\'")}')`}));
+  state.evolucoes.forEach(x=>ev.push({id:'evo-'+x.id,animal:x.animal,data:x.data||'',tipo:'Evolução',titulo:'Evolução comportamental',texto:x.mudancas||x.indicador||x.resposta||'',responsavel:x.responsavelRelato,action:`openCaseFor('${String(x.animal).replace(/'/g,"\\'")}')`}));
+  state.prescricoes.forEach(x=>ev.push({id:'rx-'+x.id,animal:x.animal,data:x.data||'',tipo:'Prescrição',titulo:x.especial?'Receituário especial':'Prescrição',texto:x.med||x.tipo||'',responsavel:x.responsavel,action:`showPrescription(${Number(x.id)})`}));
+  state.consultas.filter(c=>c.retorno).forEach(c=>ev.push({id:'ret-'+c.id,animal:c.animal,data:c.retorno,tipo:'Retorno',titulo:'Retorno programado',texto:`Referente à consulta de ${c.data||'—'} · ${c.tipo||'consulta'}`,responsavel:c.responsavel,action:`viewConsulta('${String(c.id).replace(/'/g,"\\'")}')`}));
+  state.financeiro.forEach((x,i)=>ev.push({id:'fin-'+i,animal:x.animal||'—',data:x.data||'',tipo:'Financeiro',titulo:'Lançamento financeiro',texto:`${x.servico||'Serviço'} · R$ ${Number(x.valor||0).toFixed(2).replace('.',',')} · ${x.status||'—'}`,responsavel:'',action:''}));
+  ev.forEach(e=>{const prefix=e.id.split('-')[0],rawId=e.id.slice(prefix.length+1),map={consulta:'consultas',caso:'casos',plano:'planos',evo:'evolucoes',rx:'prescricoes',ret:'consultas'},source=prefix==='fin'?state.financeiro[Number(rawId)]:state[map[prefix]]?.find(r=>String(r.id)===rawId);e.animalId=source?.animalId||''});
+  return ev.sort((a,b)=>String(b.data).localeCompare(String(a.data)) || String(b.hora||'').localeCompare(String(a.hora||'')));
+}
+function renderHistory(){
+  const sel=$('historyAnimal'), type=$('historyType'), search=$('historySearch'), box=$('historyTimeline'); if(!box)return;
+  if(sel){const current=sel.value; const names=[...new Set([...state.animais.map(a=>a.nome),...state.prontuarios.map(p=>p.animal),...state.consultas.map(c=>c.animal),...state.prescricoes.map(r=>r.animal),...state.casos.map(c=>c.animal),...state.planos.map(x=>x.animal),...state.evolucoes.map(x=>x.animal)].filter(Boolean))].sort();sel.innerHTML='<option value="">Todos os animais</option>'+names.map(n=>`<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');sel.value=current;}
+  const q=(search?.value||'').toLowerCase().trim(), animal=sel?.value||'', typ=type?.value||'';
+  const all=historyEvents(), filtered=all.filter(e=>(!animal||e.animal===animal)&&(!typ||e.tipo===typ)&&(!q||JSON.stringify(e).toLowerCase().includes(q)));
+  $('historyCount').textContent=filtered.length;$('historyConsultas').textContent=filtered.filter(e=>e.tipo==='Consulta').length;$('historyBehavior').textContent=filtered.filter(e=>e.tipo==='Comportamento'||e.tipo==='Plano'||e.tipo==='Evolução').length;$('historyRx').textContent=filtered.filter(e=>e.tipo==='Prescrição').length;
+  if(!filtered.length){box.innerHTML='<div class="sub">Nenhum evento encontrado com os filtros atuais.</div>';return;}
+  const badge={Consulta:'green',Comportamento:'orange',Plano:'blue',Evolução:'green',Prescrição:'gray',Retorno:'orange',Financeiro:'gray'};
+  box.innerHTML=filtered.map(e=>`<div class="timeline-event"><div class="timeline-head"><span><span class="badge ${badge[e.tipo]||'gray'}">${escapeHtml(e.tipo)}</span> <span class="timeline-title">${escapeHtml(e.titulo)}</span></span><span class="timeline-date">${escapeHtml(e.data||'Sem data')}${e.hora?' · '+escapeHtml(e.hora):''}</span></div><div class="timeline-body"><b>${escapeHtml(e.animal)}</b>${e.responsavel?' · '+escapeHtml(e.responsavel):''}<br>${escapeHtml(e.texto||'Sem descrição.')}</div>${e.action?`<div class="timeline-actions"><button class="btn" onclick="${e.action}">Abrir registro</button><button class="btn" onclick="openPatientChart('${String(e.animal).replace(/'/g,"\\'")}')">Abrir prontuário</button></div>`:''}</div>`).join('');
+}
+function exportHistoryReport(){
+  const events=historyEvents(); if(!events.length)return toast('Não há eventos para exportar.');
+  const animal=$('historyAnimal')?.value||'Todos os animais'; const lines=events.map(e=>`${e.data||'Sem data'} | ${e.tipo} | ${e.animal} | ${e.titulo} | ${e.texto||''}`);
+  const payload={geradoEm:new Date().toISOString(),empresa:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',profissional:'Natalia Martins Hoffmann · CRMV-SC 07725',animal, eventos:events};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`historico-clinico-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);toast('Histórico exportado.');
+}
+function getRecord(animal){let a=getAnimalByReference(animal),animalName=a?.nome||animal,p=state.prontuarios.find(x=>a?String(x.animalId)===String(a.id):x.animal===animalName);if(!p){p={id:newId('prontuario'),animal:animalName,animalId:a?.id||'',responsavel:a?.tutor||'',especie:a?.especie||'',raca:a?.raca||'',sexo:a?.sexo||'',nascimento:'',microchip:'',castrado:'',peso:a.peso||'',alergias:'',doencas:'',medicacoes:'',cirurgias:'',vacinas:'',queixa:'',historico:'',exame:'',avaliacao:'',conduta:'',observacoes:'',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};state.prontuarios.push(p);persistState()}return p}
+function openPatientChart(ref){let a=getAnimalByReference(ref);if(!a)return toast('Não foi possível identificar o animal pelo ID. Resolva o vínculo clínico pendente.');currentPatientId=a.id;let animal=a.nome,p=getRecord(a.id),animalId=a.id,cases=state.casos.filter(x=>animalRecordMatches(x,animalId)),consultas=state.consultas.filter(x=>animalRecordMatches(x,animalId)),rx=state.prescricoes.filter(x=>animalRecordMatches(x,animalId));let timeline=historyEvents().filter(x=>animalRecordMatches(x,animalId));let body=`<div class="hero"><div><h2>${escapeHtml(animal)}</h2><p>${escapeHtml(p.especie||a.especie||'')} ${escapeHtml(p.raca||a.raca||'')}</p></div><div><span class="badge green">Prontuário</span></div></div><div class="grid g4" style="margin-top:16px"><div class="card"><span class="sub">Consultas</span><div class="num">${consultas.length}</div></div><div class="card"><span class="sub">Casos comportamentais</span><div class="num">${cases.length}</div></div><div class="card"><span class="sub">Prescrições</span><div class="num">${rx.length}</div></div><div class="card"><span class="sub">Peso registrado</span><div class="num" style="font-size:20px">${escapeHtml(p.peso||a.peso||'—')} ${p.peso||a.peso?'kg':''}</div></div></div><div class="section-title"><h2>Identificação e histórico médico</h2></div><div class="grid g2"><div class="card"><p><b>Responsável pelo animal:</b> ${escapeHtml(p.responsavel||a.tutor||'—')}</p><p><b>Espécie:</b> ${escapeHtml(p.especie||a.especie||'—')} · <b>Raça:</b> ${escapeHtml(p.raca||a.raca||'—')}</p><p><b>Sexo:</b> ${escapeHtml(p.sexo||'—')} · <b>Nascimento:</b> ${escapeHtml(p.nascimento||'—')}</p><p><b>Microchip:</b> ${escapeHtml(p.microchip||'—')} · <b>Castrado:</b> ${escapeHtml(p.castrado||'—')}</p><p><b>Alergias:</b> ${escapeHtml(p.alergias||'—')}</p><p><b>Doenças/condições relevantes:</b> ${escapeHtml(p.doencas||'—')}</p><p><b>Medicações atuais:</b> ${escapeHtml(p.medicacoes||'—')}</p></div><div class="card"><p><b>Cirurgias/procedimentos:</b><br>${escapeHtml(p.cirurgias||'—')}</p><p><b>Vacinas/medidas preventivas:</b><br>${escapeHtml(p.vacinas||'—')}</p><p><b>Queixa principal:</b><br>${escapeHtml(p.queixa||'—')}</p><p><b>Histórico do problema/atendimento:</b><br>${escapeHtml(p.historico||'—')}</p></div></div><div class="section-title"><h2>Avaliação e conduta</h2><button class="btn blue" onclick="closeModal();openModal('prontuario','${String(animal).replace(/'/g,"\\'")}')">Editar prontuário</button></div><div class="grid g2"><div class="card"><h3>Exame / achados</h3><p>${escapeHtml(p.exame||'—')}</p><h3 style="margin-top:14px">Avaliação profissional</h3><p>${escapeHtml(p.avaliacao||'—')}</p></div><div class="card"><h3>Conduta / plano</h3><p>${escapeHtml(p.conduta||'—')}</p><h3 style="margin-top:14px">Observações</h3><p>${escapeHtml(p.observacoes||'—')}</p></div></div><div class="section-title"><h2>Timeline</h2></div><div class="card">${timeline.length?timeline.map(x=>`<div class="backup-row"><span><b>${escapeHtml(x.data)}</b> · <span class="badge gray">${escapeHtml(x.tipo)}</span> ${escapeHtml(x.titulo)}</span><span>${escapeHtml(x.texto||'')}</span></div>`).join(''):'<div class="sub">Nenhum evento registrado ainda.</div>'}</div>`;modal('Prontuário — '+animal,body,`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn primary" onclick="closeModal();openModal('prontuario','${String(animal).replace(/'/g,"\\'")}')">Editar</button>`)}
+function editTutor(id){const t=state.tutores.find(x=>String(x.id)===String(id));if(t)openModal('responsavel',t)}
+function editAnimal(id){const a=state.animais.find(x=>String(x.id)===String(id));if(a)openModal('animal',a)}
+function toggleArchive(kind,id){const list=kind==='animal'?state.animais:state.tutores,record=list.find(x=>String(x.id)===String(id));if(!record)return;record.archived=!record.archived;record.archivedAt=record.archived?new Date().toISOString():null;persistState();renderAll();toast(record.archived?'Registro arquivado.':'Registro restaurado.')}
+function renderAnimals(){let b=$('animalsTable');if(!state.animais.length){b.innerHTML='<tr><td colspan="6">Nenhum animal cadastrado.</td></tr>';return}b.innerHTML=state.animais.map(a=>`<tr${a.archived?' style="opacity:.55"':''}><td><b>${escapeHtml(a.nome)}</b>${a.archived?' <span class="badge gray">Arquivado</span>':''}</td><td>${escapeHtml(a.especie||'—')}</td><td>${escapeHtml(a.raca||'—')}</td><td>${escapeHtml(a.tutor||'—')}</td><td>${escapeHtml(a.comportamento||'—')}</td><td><button class="btn" onclick="openPatientChart('${a.id}')">Prontuário</button> <button class="btn" onclick="editAnimal('${a.id}')">Editar</button> <button class="btn" onclick="toggleArchive('animal','${a.id}')">${a.archived?'Restaurar':'Arquivar'}</button></td></tr>`).join('')}
+function renderTutors(){let b=$('tutoresTable');if(!state.tutores.length){b.innerHTML='<tr><td colspan="5">Nenhum responsável cadastrado.</td></tr>';return}b.innerHTML=state.tutores.map(t=>`<tr${t.archived?' style="opacity:.55"':''}><td><b>${escapeHtml(t.nome)}</b>${t.archived?' <span class="badge gray">Arquivado</span>':''}</td><td>${escapeHtml(t.tel||'—')}</td><td>${escapeHtml(t.email||'—')}</td><td>${state.animais.filter(a=>a.tutor===t.nome).length}</td><td><button class="btn" onclick="editTutor('${t.id}')">Abrir</button> <button class="btn" onclick="toggleArchive('tutor','${t.id}')">${t.archived?'Restaurar':'Arquivar'}</button></td></tr>`).join('')}
+function renderAgenda(){let b=$('agendaTable');if(!state.consultas.length){b.innerHTML='<tr><td colspan="7">Nenhum compromisso.</td></tr>';return}b.innerHTML=state.consultas.map(c=>`<tr><td>${escapeHtml(c.data)}</td><td>${escapeHtml(c.hora||'—')}</td><td>${escapeHtml(c.animal)}</td><td>${escapeHtml(c.tipo)}</td><td><span class="badge ${c.status==='Pago'?'green':c.status==='Cancelada'?'red':'orange'}">${escapeHtml(c.status||'Agendada')}</span></td><td>R$ ${Number(c.valor||0).toFixed(2).replace('.',',')}</td><td><button class="btn" onclick="viewConsulta('${String(c.id).replace(/'/g,"\\'")}')">Abrir</button></td></tr>`).join('')}
+function renderConsultas(){let b=$('consultasTable');if(!state.consultas.length){b.innerHTML='<tr><td colspan="6">Nenhuma consulta.</td></tr>';return}b.innerHTML=state.consultas.map(c=>`<tr><td>${escapeHtml(c.data)}</td><td>${escapeHtml(c.animal)}</td><td>${escapeHtml(c.tipo)}</td><td>R$ ${Number(c.valor||0).toFixed(2).replace('.',',')}</td><td><span class="badge ${c.status==='Pago'?'green':c.status==='Cancelada'?'red':'orange'}">${escapeHtml(c.status||'Agendada')}</span></td><td><button class="btn" onclick="viewConsulta('${String(c.id).replace(/'/g,"\\'")}')">Abrir</button></td></tr>`).join('')}
+function renderRetornos(){let b=$('retornosTable');if(!b)return;let items=state.consultas.filter(c=>c.retorno&&!c.retorno.startsWith('0000')).sort((a,z)=>String(a.retorno).localeCompare(String(z.retorno)));if(!items.length){b.innerHTML='<tr><td colspan="5">Nenhum retorno programado.</td></tr>';return}b.innerHTML=items.map(c=>`<tr><td>${escapeHtml(c.retorno)}</td><td><b>${escapeHtml(c.animal)}</b></td><td>${escapeHtml(c.tipo)}</td><td>${escapeHtml(c.responsavel||'—')}</td><td><button class="btn" onclick="viewConsulta('${String(c.id).replace(/'/g,"\\'")}')">Abrir consulta</button></td></tr>`).join('')}
+function renderCases(){let b=$('casesTable');if(!state.casos.length){b.innerHTML='<tr><td colspan="7">Nenhum caso cadastrado.</td></tr>';return}b.innerHTML=state.casos.map(c=>{let plans=state.planos.filter(p=>animalRecordMatches(p,c.animalId||c.animal)&&p.status==='Ativo');return `<tr><td><b>${escapeHtml(c.animal)}</b></td><td>${escapeHtml(c.queixa)}</td><td><span class="badge ${c.risco==='Alto'?'red':c.risco==='Moderado'?'orange':'green'}">${escapeHtml(c.risco)}</span></td><td>${escapeHtml(c.intensidade)}/5</td><td>${escapeHtml(c.data)}</td><td>${plans.length?`<span class="badge blue">${plans.length} ativo(s)</span>`:'—'}</td><td><button class="btn" onclick="viewCase('${String(c.id).replace(/'/g,"\'")}')">Abrir</button></td></tr>`}).join('');$('redFlags').innerHTML=state.casos.length?state.casos.map(c=>`<div class="alert ${c.risco==='Alto'?'red':c.risco==='Moderado'?'yellow':'green'}"><b>${escapeHtml(c.animal)}:</b> risco ${escapeHtml(c.risco)}. ${escapeHtml(c.alertas||'Sem alerta informado.')}</div>`).join(''):'<div class="alert green">Nenhum caso registrado ainda.</div>'}
+
+function saveRecord(){let animal=$('prAnimal').value.trim();if(!animal)return toast('Informe o animal.');let p=state.prontuarios.find(x=>x.animal===animal);if(!p){p={id:newId('record'),animal,createdAt:new Date().toISOString()};state.prontuarios.push(p)}Object.assign(p,{responsavel:$('prResp').value,especie:$('prEsp').value,raca:$('prRaca').value,sexo:$('prSexo').value,nascimento:$('prNasc').value,microchip:$('prChip').value,castrado:$('prCast').value,peso:$('prPeso').value,alergias:$('prAlergias').value,doencas:$('prDoencas').value,medicacoes:$('prMeds').value,cirurgias:$('prCirurgias').value,vacinas:$('prVacinas').value,queixa:$('prQueixa').value,historico:$('prHistorico').value,exame:$('prExame').value,avaliacao:$('prAvaliacao').value,conduta:$('prConduta').value,observacoes:$('prObs').value,updatedAt:new Date().toISOString()});persistState();closeModal();renderAll();toast('Prontuário salvo.')}
+function saveRecord(){const name=$('prAnimal').value.trim();let animal=getAnimalByReference(name);if(!animal&&currentPatientId){const current=state.animais.find(a=>String(a.id)===String(currentPatientId));if(current?.nome===name)animal=current}if(!animal)return toast('Selecione o animal pelo cadastro para associar este prontuário ao ID certo.');let p=state.prontuarios.find(x=>String(x.animalId)===String(animal.id));if(!p){p={id:newId('prontuario'),animal:animal.nome,animalId:animal.id,createdAt:new Date().toISOString()};state.prontuarios.push(p)}Object.assign(p,{animal:animal.nome,animalId:animal.id,responsavel:$('prResp').value,especie:$('prEsp').value,raca:$('prRaca').value,sexo:$('prSexo').value,nascimento:$('prNasc').value,microchip:$('prChip').value,castrado:$('prCast').value,peso:$('prPeso').value,alergias:$('prAlergias').value,doencas:$('prDoencas').value,medicacoes:$('prMeds').value,cirurgias:$('prCirurgias').value,vacinas:$('prVacinas').value,queixa:$('prQueixa').value,historico:$('prHistorico').value,exame:$('prExame').value,avaliacao:$('prAvaliacao').value,conduta:$('prConduta').value,observacoes:$('prObs').value,updatedAt:new Date().toISOString()});persistState();closeModal();renderAll();toast('Prontuário salvo.')}
+function renderRecords(){const b=$('recordsTable');if(!b)return;if(!state.prontuarios.length){b.innerHTML='<tr><td colspan="6">Nenhum prontuário iniciado.</td></tr>';return}b.innerHTML=state.prontuarios.map(p=>{const a=state.animais.find(x=>String(x.id)===String(p.animalId))||{};const n=state.consultas.filter(x=>animalRecordMatches(x,p.animalId)).length,c=state.casos.filter(x=>animalRecordMatches(x,p.animalId)).length;return `<tr><td><b>${escapeHtml(a.nome||p.animal)}</b><br><span class="sub">${escapeHtml(a.especie||p.especie||'—')} · ${escapeHtml(a.raca||p.raca||'—')}</span></td><td>${escapeHtml(p.responsavel||a.tutor||'—')}</td><td>${escapeHtml(p.updatedAt?new Date(p.updatedAt).toLocaleDateString('pt-BR'):'—')}</td><td>${n}</td><td>${c?`<span class="badge orange">${c} caso(s)</span>`:'—'}</td><td><button class="btn" onclick="openPatientChart('${p.animalId||p.animal}')">Abrir</button></td></tr>`}).join('')}
+function saveTutor(){let nome=$('rNome').value.trim();if(!nome)return toast('Informe o nome.');if(state.tutores.some(t=>t!==editingTutor&&t.nome.trim().toLocaleLowerCase()===nome.toLocaleLowerCase()))return toast('Já existe um responsável com esse nome.');const record=editingTutor||{id:crypto.randomUUID?.()||('tutor-'+Date.now())},oldName=record.nome;Object.assign(record,{nome,tel:$('rTel').value,email:$('rEmail').value});if(!editingTutor)state.tutores.push(record);else if(oldName!==nome){state.animais.forEach(a=>{if(a.tutor===oldName)a.tutor=nome});state.prontuarios.forEach(a=>{if(a.responsavel===oldName)a.responsavel=nome});state.consultas.forEach(a=>{if(a.responsavel===oldName)a.responsavel=nome});state.prescricoes.forEach(a=>{if(a.responsavel===oldName)a.responsavel=nome})}editingTutor=null;persistState();closeModal();renderAll();toast('Responsável salvo.')}
+function saveAnimal(){let nome=$('aNome').value.trim();if(!nome)return toast('Informe o nome do animal.');if(state.animais.some(a=>a!==editingAnimal&&a.nome.trim().toLocaleLowerCase()===nome.toLocaleLowerCase()))return toast('Já existe um animal com esse nome. Use um nome distinto para evitar confusão entre prontuários.');const record=editingAnimal||{id:crypto.randomUUID?.()||('animal-'+Date.now())},oldName=record.nome;Object.assign(record,{nome,especie:$('aEsp').value,raca:$('aRaca').value,tutor:$('aTutor').value.trim(),peso:$('aPeso').value,comportamento:$('aComp').value});if(!editingAnimal)state.animais.push(record);else if(oldName!==nome){['prontuarios','consultas','casos','prescricoes','planos','evolucoes'].forEach(k=>state[k].forEach(x=>{if(x.animal===oldName)x.animal=nome}));state.financeiro.forEach(x=>{if(x.animal===oldName)x.animal=nome})}editingAnimal=null;persistState();closeModal();renderAll();toast('Animal salvo.')}
+function saveConsulta(){let animal=$('cAnimal').value.trim();if(!animal)return toast('Informe o animal.');let now=new Date().toISOString(),data=$('cData').value||new Date().toISOString().slice(0,10);let consulta={id:newId('record'),animal,responsavel:$('cResp').value.trim(),data,hora:$('cHora').value,tipo:$('cTipo').value,valor:$('cValor').value,status:$('cStatus').value,forma:$('cForma').value,queixa:$('cQueixa').value,historico:$('cHistorico').value,exame:$('cExame').value,avaliacao:$('cAvaliacao').value,plano:$('cPlano').value,comportamento:$('cComportamento').value,retorno:$('cRetorno').value,peso:$('cPeso').value,obs:$('cObs').value,createdAt:now,updatedAt:now};state.consultas.push(consulta);let p=getRecord(animal);if(consulta.responsavel)p.responsavel=consulta.responsavel;if(consulta.peso)p.peso=consulta.peso;p.queixa=consulta.queixa||p.queixa;p.historico=[p.historico,`[${data}] ${consulta.historico}`].filter(Boolean).join('\n\n');p.exame=[p.exame,`[${data}] ${consulta.exame}`].filter(Boolean).join('\n\n');p.avaliacao=[p.avaliacao,`[${data}] ${consulta.avaliacao}`].filter(Boolean).join('\n\n');p.conduta=[p.conduta,`[${data}] ${consulta.plano}`].filter(Boolean).join('\n\n');p.observacoes=[p.observacoes,`[${data}] ${consulta.obs}`].filter(Boolean).join('\n\n');p.updatedAt=now;persistState();closeModal();renderAll();toast('Consulta e evolução registradas no prontuário.');viewConsulta(consulta.id)}
+function viewConsulta(id){let c=state.consultas.find(x=>String(x.id)===String(id));if(!c)return;let body=`<div class="hero"><div><h2>${escapeHtml(c.animal)}</h2><p>${escapeHtml(c.tipo)} · ${escapeHtml(c.data)} ${escapeHtml(c.hora||'')}</p></div><div><span class="badge ${c.status==='Pago'?'green':c.status==='Cancelada'?'red':'orange'}">${escapeHtml(c.status||'Agendada')}</span></div></div><div class="grid g4" style="margin-top:16px"><div class="card"><span class="sub">Valor</span><div class="num" style="font-size:20px">R$ ${Number(c.valor||0).toFixed(2).replace('.',',')}</div></div><div class="card"><span class="sub">Peso</span><div class="num" style="font-size:20px">${escapeHtml(c.peso||'—')} ${c.peso?'kg':''}</div></div><div class="card"><span class="sub">Próximo retorno</span><div class="num" style="font-size:18px">${escapeHtml(c.retorno||'—')}</div></div><div class="card"><span class="sub">Pagamento</span><div style="font-weight:700;margin-top:8px">${escapeHtml(c.forma||'Não informado')}</div></div></div><div class="grid g2" style="margin-top:16px"><div class="card"><h3>Motivo / queixa</h3><p>${escapeHtml(c.queixa||'—')}</p><h3>Histórico / evolução</h3><p>${escapeHtml(c.historico||'—')}</p><h3>Exame / observações clínicas</h3><p>${escapeHtml(c.exame||'—')}</p></div><div class="card"><h3>Avaliação profissional</h3><p>${escapeHtml(c.avaliacao||'—')}</p><h3>Conduta / plano / orientações</h3><p>${escapeHtml(c.plano||'—')}</p><h3>Evolução comportamental</h3><p>${escapeHtml(c.comportamento||'—')}</p><h3>Observações administrativas</h3><p>${escapeHtml(c.obs||'—')}</p></div></div><div class="alert green" style="margin-top:16px"><b>Integração:</b> este registro já foi incorporado ao prontuário de ${escapeHtml(c.animal)}.</div>`;modal('Consulta / evolução',body,`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn primary" onclick="closeModal();openPatientChart('${String(c.animal).replace(/'/g,"\\'")}')">Abrir prontuário</button>`)}
+function saveTriage(){let animal=$('tAnimal').value.trim();if(!animal)return toast('Informe o animal.');let chips=[...document.querySelectorAll('#chips .chip.on')].map(x=>x.textContent).join(', ');let id=Date.now();state.casos.push({id,animal,queixa:$('tQueixa').value||'Não informado',risco:$('tRisco').value,intensidade:$('tInt').value,data:$('tData').value||new Date().toLocaleDateString('pt-BR'),alertas:$('tAlert').value||'Sem alerta informado.',triggers:chips,objetivo:$('tObj').value,contexto:$('tContexto').value,antecedente:$('tAnte').value,comportamento:$('tBeh').value,consequencia:$('tCons').value,formulacao:$('tForm').value});persistState();closeModal();renderAll();toast('Triagem salva. O caso foi adicionado ao acompanhamento.')}
+function savePlan(){let animal=$('plAnimal').value.trim();if(!animal)return toast('Informe o animal.');let p={id:newId('record'),animal,data:$('plData').value||new Date().toISOString().slice(0,10),objetivo:$('plObjetivo').value,alvo:$('plAlvo').value,metas:$('plMetas').value,manejo:$('plManejo').value,treino:$('plTreino').value,enriquecimento:$('plEnriq').value,orientacoes:$('plOrient').value,reavaliacao:$('plReav').value,status:$('plStatus').value,seguranca:$('plSeg').value,observacoes:$('plObs').value,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};state.planos.push(p);persistState();closeModal();renderAll();toast('Plano de intervenção salvo.');openCaseFor(animal)}
+function saveEvolution(){let animal=$('evAnimal').value.trim();if(!animal)return toast('Informe o animal.');let e={id:newId('record'),animal,data:$('evData').value||new Date().toISOString().slice(0,10),periodo:$('evPeriodo').value,adesao:$('evAdesao').value,freqNum:parseFloat($('evFreq').value)||null,frequencia:$('evFreq').value,intensidade:$('evInt').value,indicador:$('evMudancas').value,mudancas:$('evMudancas').value,resposta:$('evResposta').value,riscos:$('evRiscos').value,ajustes:$('evAjustes').value,reavaliacao:$('evReav').value,responsavelRelato:$('evResp').value,createdAt:new Date().toISOString()};state.evolucoes.push(e);let p=getRecord(animal);p.observacoes=[p.observacoes,`[${e.data}] Evolução comportamental: ${e.mudancas||''}`].filter(Boolean).join('\n\n');p.updatedAt=new Date().toISOString();persistState();closeModal();renderAll();toast('Evolução registrada no prontuário.');openCaseFor(animal)}
+function renderBehaviorEvolution(){let pt=$('plansTable'),et=$('evolutionTable');if(pt)pt.innerHTML=state.planos.length?state.planos.slice().sort((a,b)=>String(b.data).localeCompare(String(a.data))).map(p=>`<tr><td><b>${escapeHtml(p.animal)}</b></td><td>${escapeHtml(p.objetivo||'—')}</td><td>${escapeHtml(p.metas||'—')}</td><td>${escapeHtml(p.reavaliacao||'—')}</td><td><span class="badge ${p.status==='Ativo'?'green':p.status==='Concluído'?'blue':'gray'}">${escapeHtml(p.status)}</span></td><td><button class="btn" onclick="openCaseFor('${String(p.animal).replace(/'/g,"\'")}')">Abrir</button></td></tr>`).join(''):'<tr><td colspan="6">Nenhum plano registrado.</td></tr>';if(et)et.innerHTML=state.evolucoes.length?state.evolucoes.slice().sort((a,b)=>String(b.data).localeCompare(String(a.data))).map(e=>`<tr><td>${escapeHtml(e.data)}</td><td><b>${escapeHtml(e.animal)}</b></td><td>${escapeHtml(e.indicador||'—')}</td><td>${escapeHtml(e.frequencia||'—')}</td><td>${escapeHtml(e.intensidade||'—')}/5</td><td>${escapeHtml(e.adesao||'—')}%</td><td><button class="btn" onclick="openModal('evolucao','${String(e.animal).replace(/'/g,"\'")}')">Abrir</button></td></tr>`).join(''):'<tr><td colspan="7">Nenhuma evolução registrada.</td></tr>';let f=state.evolucoes.filter(e=>e.freqNum!==null),ints=state.evolucoes.map(e=>Number(e.intensidade)).filter(Boolean),ads=state.evolucoes.map(e=>Number(e.adesao)).filter(v=>!isNaN(v));if($('evoCount'))$('evoCount').textContent=state.evolucoes.length;if($('evoFreq'))$('evoFreq').textContent=f.length?(f.reduce((a,e)=>a+e.freqNum,0)/f.length).toFixed(1):'—';if($('evoInt'))$('evoInt').textContent=ints.length?(ints.reduce((a,v)=>a+v,0)/ints.length).toFixed(1)+'/5':'—';if($('evoAdesao'))$('evoAdesao').textContent=ads.length?Math.round(ads.reduce((a,v)=>a+v,0)/ads.length)+'%':'—'}
+function openOfficialRxModel(type){const root='https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/controlados/sncr/';const urls={'notificacao-a-vet':root+'receituario-fisico/modelos-vigentes/notificacao-de-receita-a-vet.pdf/@@display-file/file','notificacao-b-vet':root+'receituario-fisico/modelos-vigentes/notificacao-de-receita-b-vet.pdf/@@display-file/file'};if(type==='notificacao-mapa-vet'){openMapaControlledRxInfo();return}const url=urls[type]||root+'receituario-fisico/modelos-vigentes';const w=window.open(url,'_blank','noopener');if(!w)toast('O navegador bloqueou a abertura. Use o botão de pop-ups para abrir o modelo oficial da Anvisa.')}
+function openMapaControlledRxInfo(){const url='https://www.gov.br/agricultura/pt-br/assuntos/insumos-agropecuarios/insumos-pecuarios/produtos-veterinarios/cadastro-de-medicos-veterinarios/quero-emitir-notificacao-de-receita-veterinaria-ou-de-aquisicao-por-medico-veterinario';const w=window.open(url,'_blank','noopener');if(!w)toast('O navegador bloqueou a abertura. Consulte SIPEAGRO no portal do MAPA.')}
+function toggleRxSpecialFields(){const special=$('pTipo').value!=='comum';$('specialRxPanel').style.display=special?'block':'none';$('commonRxPanel').style.display=special?'none':'block';if(special){const type=$('pTipo').value;const hints={controle:'Receita de Controle Especial: siga integralmente o modelo físico vigente ou o fluxo eletrônico integrado ao SNCR quando aplicável.',retencao:'Receita sujeita à retenção: confirme a norma específica do medicamento e o modelo aplicável.','notificacao-a-vet':'Notificação de Receita A VET: modelo veterinário oficial vigente da Anvisa.','notificacao-b-vet':'Notificação de Receita B VET: modelo veterinário oficial vigente da Anvisa.','notificacao-mapa-vet':'Produto veterinário sujeito a controle especial: emissão pelo SIPEAGRO, conforme modelo MAPA; este módulo não emite notificação oficial.','notificacao-a':'Notificação de Receita A: numeração e fluxo dependem da Vigilância Sanitária.','notificacao-b':'Notificação de Receita B: numeração e fluxo dependem da Vigilância Sanitária.','notificacao-b2':'Notificação de Receita B2: utilize o modelo oficial vigente.',retinoides:'Notificação especial para retinoides de uso sistêmico: utilize o modelo oficial vigente.',talidomida:'Notificação de Receita para talidomida: utilize o modelo oficial e as exigências específicas.','outro-especial':'Confira a norma específica antes da emissão.'};$('specialTypeHint').textContent=hints[type]||'Confira o modelo oficial vigente.';}else{const d=new Date().toISOString().slice(0,10);if($('pDataCommon'))$('pDataCommon').value=d;}}
+function saveRxImpl(printAfter=false){const tipo=$('pTipo').value,special=tipo!=='comum';let rx;if(special){let animal=$('pAnimal').value.trim();if(!animal)return toast('Informe o paciente / animal.');if(isOfficialVetNotification(tipo)){const required=['pNumero','pResponsavel','pDocResp','pEndResp','pEspecie','pPorte','pComprador','pDocComprador','pEndComprador','pTelComprador','pMed','pConc','pForma','pQtd','pFreq','pCrmv','pEndereco','pContato'];const missing=required.find(id=>!$(id).value.trim());if(missing)return toast('Preencha os campos obrigatórios do modelo oficial antes de salvar.');}rx={id:newId('record'),tipo,data:$('pData').value||new Date().toISOString().slice(0,10),animal,responsavel:$('pResponsavel').value.trim(),docResponsavel:$('pDocResp').value,especie:$('pEspecie').value,raca:$('pRaca').value,peso:$('pPeso').value,porte:$('pPorte').value,numero:$('pNumero').value,emitente:$('pEmitente').value,crmv:$('pCrmv').value,endereco:$('pEndereco').value,contato:$('pContato').value,endResp:$('pEndResp').value,telResp:$('pTelResp').value,comprador:$('pComprador').value,docComprador:$('pDocComprador').value,endComprador:$('pEndComprador').value,telComprador:$('pTelComprador').value,med:$('pMed').value.trim(),conc:$('pConc').value,forma:$('pForma').value,qtd:$('pQtd').value,freq:$('pFreq').value,obs:$('pObs').value,especial:true,empresa:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',createdAt:new Date().toISOString()};}else{let animal=$('pAnimalCommon').value.trim();if(!animal)return toast('Informe o paciente / animal.');rx={id:newId('record'),tipo,data:$('pDataCommon').value||new Date().toISOString().slice(0,10),animal,responsavel:$('pResponsavelCommon').value.trim(),especie:$('pEspecieCommon').value,peso:$('pPesoCommon').value,med:$('pMedCommon').value.trim(),ativo:$('pAtivoCommon').value,conc:$('pConcCommon').value,qtd:$('pQtdCommon').value,unid:$('pUnidCommon').value,via:$('pViaCommon').value,freq:$('pFreqCommon').value,dur:$('pDurCommon').value,adm:$('pAdmCommon').value,inst:$('pInstCommon').value,obs:$('pObsCommon').value,endereco:$('pEnderecoCommon').value,contato:$('pContatoCommon').value,especial:false,empresa:'Natalia Hoffmann Serviços Veterinários Ltda - ME',cnpj:'57.586.835/0001-92',createdAt:new Date().toISOString()};}rx.retencaoAte=addYears(rx.data,5);state.prescricoes.push(rx);let persistError=null;try{persistState()}catch(e){persistError=e;console.error('Falha ao persistir prescrição',e)}try{closeModal();renderAll()}catch(e){console.warn('Falha ao atualizar listas após salvar prescrição',e)}if(special)toast('Receituário especial registrado para controle. A emissão válida deve seguir o modelo oficial e o fluxo sanitário aplicável.');else toast('Prescrição registrada.');showPrescription(rx);if(persistError)toast('A prescrição foi preparada, mas houve falha ao gravar no armazenamento local. Exporte um backup e verifique o espaço disponível.')}
+function addYears(dateStr,years){const d=new Date(dateStr+'T12:00:00');d.setFullYear(d.getFullYear()+years);return d.toISOString().slice(0,10)}
+function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;',"\"":'&quot;'}[m]));}
+function isOfficialVetNotification(type){const value=String(type||'').trim().toLowerCase();return value==='notificacao-a-vet'||value==='notificacao-b-vet'}
+function buildOfficialVetNotification(rx){
+  const letter=rx.tipo==='notificacao-a-vet'?'a':'b';
+  const bg=letter==='a'?'#ebd88a':'#a3c4d7';
+  const field=(text,left,top,width,height,extra='')=>`<span class="official-v" style="left:${left}mm;top:${top}mm;width:${width}mm;height:${height}mm;${extra}">${escapeHtml(text||'')}</span>`;
+  const patient=[rx.especie,rx.raca].filter(Boolean).join(' / ');
+  const patientFont=Math.max(4,Math.min(5.5,72/Math.max(1,patient.length)));
+  const issuer=[rx.emitente,rx.crmv?`CRMV-SC ${rx.crmv}`:''].filter(Boolean).join(' · ');
+  const issuerAddress=[rx.endereco,rx.contato].filter(Boolean).join(' · ');
+  return `<div id="rxPrint" class="official-notification print-area"><img class="official-template" src="assets/notificacao-${letter}-vet-v2.png" alt="Modelo oficial Anvisa Notificação de Receita ${letter.toUpperCase()} VET"><div class="official-overlays"><div class="official-cover" style="left:49mm;top:5.4mm;width:65mm;height:18mm;background:${bg}">${field(issuer,1,1,63,5,'font-weight:700')}${field(issuerAddress,1,7,63,9)}</div>${field(rx.numero,6,10.5,31,3,'text-align:center;font-weight:700')}${field(rx.responsavel,26,17.8,16,3,'font-size:5.5pt')}${field(rx.docResponsavel,4,29.2,39,3)}${field(rx.endResp,25,39.8,17,3,'font-size:5.5pt')}${field(patient,28,49,14,3,`font-size:${patientFont}pt;white-space:nowrap`)}${field(rx.porte,12,54.5,30,3)}${field(rx.comprador,63,33,49,3)}${field(rx.docComprador,78,38.5,34,3)}${field(rx.endComprador,70,43.5,42,3)}${field(rx.telComprador,64,47.5,48,3)}${field(rx.med,151,9.5,47,3)}${field(rx.conc,151,13.5,47,3)}${field(rx.forma,151,17.5,47,3)}${field(rx.qtd,151,21.5,47,3)}${field(rx.freq,151,25.5,47,15)}${field(new Date((rx.data||'')+'T12:00:00').toLocaleDateString('pt-BR'),127,47,24,3)}</div></div>`;
+}
+
+function showPrescription(rx){const special=!!rx.especial||isOfficialVetNotification(rx.tipo);const official=special?`<div class="special-banner"><div>⚠️</div><div><div class="special-title">Cópia clínica — não é uma notificação oficial</div><div>Para aquisição/dispensação, use o formulário vigente emitido pelo sistema oficial aplicável (Anvisa/SNCR ou MAPA/SIPEAGRO). Esta cópia não substitui numeração, vias, assinatura nem os demais requisitos regulatórios.</div></div></div>`:'';const body=special?(isOfficialVetNotification(rx.tipo)?`<div class="special-banner screen-only"><div>ℹ️</div><div><div class="special-title">Modelo físico oficial ${rx.tipo.endsWith('a-vet')?'A':'B'} VET</div><div>Confira os dados e imprima em tamanho original (20 × 6 cm). A via impressa deve seguir as exigências de numeração, assinatura e carimbo. Este recurso prepara o modelo físico e não emite receita eletrônica pelo SNCR.</div></div></div>${buildOfficialVetNotification(rx)}`:`<div class="print-area" id="rxPrint"><div class="rx-head"><div><img src="assets/logo-lia-hoff.png" alt="Lia Hoff" style="width:190px;max-width:100%;height:auto"><div class="rx-meta" style="margin-top:8px"><b>Natalia Martins Hoffmann</b><br>Médica-Veterinária · CRMV-SC 07725</div></div><div style="text-align:right;font-size:11px"><b>${escapeHtml(rx.tipo)}</b><br>Nº ${escapeHtml(rx.numero||'não informado')}<br>${escapeHtml(new Date(rx.data+'T12:00:00').toLocaleDateString('pt-BR'))}</div></div>${official}<div class="rx-section"><h3>Identificação</h3><div class="rx-line"><b>Responsável pelo animal:</b> ${escapeHtml(rx.responsavel||'—')}<br><b>Documento:</b> ${escapeHtml(rx.docResponsavel||'—')}<br><b>Animal:</b> ${escapeHtml(rx.animal)}<br><b>Espécie / raça:</b> ${escapeHtml(rx.especie||'—')} ${rx.porte?`· <b>Porte:</b> ${escapeHtml(rx.porte)}`:''} ${rx.peso?`· <b>Peso:</b> ${escapeHtml(rx.peso)} kg`:''}</div></div><div class="rx-section"><h3>Prescrição</h3><div class="rx-line"><b>Medicamento / substância:</b> ${escapeHtml(rx.med||'—')}<br><b>Concentração:</b> ${escapeHtml(rx.conc||'—')} · <b>Forma:</b> ${escapeHtml(rx.forma||'—')}<br><b>Quantidade:</b> ${escapeHtml(rx.qtd||'—')}<br><b>Posologia:</b> ${escapeHtml(rx.freq||'—')}</div></div><div class="rx-section"><h3>Comprador</h3><div class="rx-line">${escapeHtml(rx.comprador||'—')} · ${escapeHtml(rx.docComprador||'—')}<br>${escapeHtml(rx.endComprador||'—')} · ${escapeHtml(rx.telComprador||'—')}</div></div><div class="rx-section"><b>Observações</b><div class="rx-line">${escapeHtml(rx.obs||'—')}</div></div><div class="rx-signature"><b>Natalia Martins Hoffmann</b><br>Médica-Veterinária<br>CRMV-SC 07725</div><div class="rx-footer">Lia Hoff — Comportamento e Bem-estar Animal<br>Natalia Hoffmann Serviços Veterinários Ltda - ME · CNPJ 57.586.835/0001-92<br><span class="rx-meta">Registro interno — retenção planejada até ${escapeHtml(new Date(rx.retencaoAte+'T12:00:00').toLocaleDateString('pt-BR'))}.</span></div></div>`):`<div class="print-area" id="rxPrint"><div class="rx-head"><div><img src="assets/logo-lia-hoff.png" alt="Lia Hoff" style="width:210px;max-width:100%;height:auto"><div class="rx-meta" style="margin-top:8px"><b>Médica-Veterinária Natalia Martins Hoffmann</b><br>CRMV-SC 07725</div></div><div style="text-align:right;font-size:12px"><b>RECEITA / PRESCRIÇÃO</b><br>${escapeHtml(new Date(rx.data+'T12:00:00').toLocaleDateString('pt-BR'))}</div></div><div class="rx-section"><b>Paciente / animal:</b> ${escapeHtml(rx.animal)}<br><b>Espécie:</b> ${escapeHtml(rx.especie||'—')} ${rx.peso?`<br><b>Peso:</b> ${escapeHtml(rx.peso)} kg`:''}<br><b>Responsável pelo animal:</b> ${escapeHtml(rx.responsavel||'—')}</div><div class="rx-section"><h3>Prescrição</h3><div class="rx-line"><b>${escapeHtml(rx.med||'—')}</b>${rx.ativo?`<br><span class="rx-meta">Princípio ativo / composição: ${escapeHtml(rx.ativo)}</span>`:''}<br>${escapeHtml(rx.conc||'')} ${rx.unid?`· ${escapeHtml(rx.unid)}`:''}<br><b>Quantidade:</b> ${escapeHtml(rx.qtd||'—')} ${escapeHtml(rx.unid||'')}<br><b>Via:</b> ${escapeHtml(rx.via)} · <b>Posologia:</b> ${escapeHtml(rx.freq||'—')} · <b>Duração:</b> ${escapeHtml(rx.dur||'—')}</div></div><div class="rx-section"><b>Orientações ao responsável pelo animal</b><div class="rx-line">${escapeHtml(rx.inst||'—')}</div></div><div class="rx-section"><b>Advertências / observações</b><div class="rx-line">${escapeHtml(rx.obs||'—')}</div></div><div class="rx-signature"><b>Natalia Martins Hoffmann</b><br>Médica-Veterinária<br>CRMV-SC 07725</div><div class="rx-footer">Lia Hoff — Comportamento e Bem-estar Animal<br>Natalia Hoffmann Serviços Veterinários Ltda - ME · CNPJ 57.586.835/0001-92${rx.endereco?`<br>${escapeHtml(rx.endereco)}`:''}${rx.contato?`<br>${escapeHtml(rx.contato)}`:''}</div></div>`;const foot=isOfficialVetNotification(rx.tipo)?`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn" onclick="openOfficialRxModel('${escapeHtml(rx.tipo)}')">Modelo oficial em branco</button><button class="btn primary" onclick="printRx()">Imprimir notificação / salvar PDF</button>`:special?`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn" onclick="openOfficialRxModel('${escapeHtml(rx.tipo)}')">Modelo oficial</button><button class="btn primary" onclick="printRx()">Imprimir cópia clínica</button>`:`<button class="btn" onclick="closeModal()">Fechar</button><button class="btn primary" onclick="printRx()">Imprimir / salvar PDF</button>`;modal(special?'Registro de receituário especial':'Visualização da prescrição',body,foot);}
+
+function saveFinance(){let valor=Number($('fValor').value||0);if(!valor)return toast('Informe o valor.');state.financeiro.push({data:$('fData').value||new Date().toLocaleDateString('pt-BR'),animal:$('fAnimal').value||'—',servico:$('fServico').value,valor,status:$('fStatus').value,forma:$('fForma').value});persistState();closeModal();renderAll();toast('Lançamento financeiro salvo.')}
+function viewCase(id){let c=state.casos.find(x=>x.id==id);if(!c)return;let plans=state.planos.filter(p=>animalRecordMatches(p,c.animalId||c.animal)),evos=state.evolucoes.filter(e=>animalRecordMatches(e,c.animalId||c.animal)).sort((a,b)=>String(b.data).localeCompare(String(a.data)));let body=`<div class="hero"><div><h2>${escapeHtml(c.animal)}</h2><p>${escapeHtml(c.queixa)}</p></div><div><span class="badge ${c.risco==='Alto'?'red':c.risco==='Moderado'?'orange':'green'}">${escapeHtml(c.risco)}</span></div></div><div class="grid g4" style="margin-top:16px"><div class="card"><span class="sub">Intensidade</span><div class="num">${escapeHtml(c.intensidade)}/5</div></div><div class="card"><span class="sub">Planos</span><div class="num">${plans.length}</div></div><div class="card"><span class="sub">Evoluções</span><div class="num">${evos.length}</div></div><div class="card"><span class="sub">Reavaliações</span><div class="num">${plans.filter(p=>p.reavaliacao).length}</div></div></div><div class="grid g2" style="margin-top:16px"><div class="card"><h3>Triagem</h3><p><b>Início:</b> ${escapeHtml(c.inicio||'—')}</p><p><b>Frequência/duração:</b> ${escapeHtml(c.frequencia||'—')}</p><p><b>Gatilhos:</b> ${escapeHtml(c.triggers||'—')}</p><p><b>Contexto:</b> ${escapeHtml(c.contexto||'—')}</p><p><b>Alertas:</b> ${escapeHtml(c.alertas||'—')}</p><p><b>Histórico médico:</b> ${escapeHtml(c.med||'—')}</p></div><div class="card"><h3>Formulação</h3><p><b>Antecedente:</b> ${escapeHtml(c.antecedente||'—')}</p><p><b>Comportamento:</b> ${escapeHtml(c.comportamento||'—')}</p><p><b>Consequência:</b> ${escapeHtml(c.consequencia||'—')}</p><p><b>O que já foi tentado:</b> ${escapeHtml(c.tentativas||'—')}</p><p><b>Bem-estar:</b> ${escapeHtml(c.bemestar||'—')}</p><p><b>Hipóteses:</b> ${escapeHtml(c.formulacao||'—')}</p></div></div><div class="section-title"><h2>Plano de intervenção</h2><button class="btn blue" onclick="closeModal();openModal('plano','${String(c.animal).replace(/'/g,"\'")}')">＋ Novo plano</button></div><div class="card">${plans.length?plans.map(p=>`<div class="backup-row"><span><b>${escapeHtml(p.objetivo||'Objetivo não informado')}</b><br><span class="sub">Metas: ${escapeHtml(p.metas||'—')}</span></span><span><span class="badge ${p.status==='Ativo'?'green':'gray'}">${escapeHtml(p.status)}</span><br><small>Reavaliação: ${escapeHtml(p.reavaliacao||'—')}</small></span></div>`).join(''):'<div class="sub">Nenhum plano registrado.</div>'}</div><div class="section-title"><h2>Evolução</h2><button class="btn" onclick="closeModal();openModal('evolucao','${String(c.animal).replace(/'/g,"\'")}')">＋ Registrar evolução</button></div><div class="card">${evos.length?evos.map(e=>`<div class="backup-row"><span><b>${escapeHtml(e.data)}</b> · ${escapeHtml(e.indicador||'Evolução')}</span><span>Freq.: ${escapeHtml(e.frequencia||'—')} · Int.: ${escapeHtml(e.intensidade||'—')}/5 · Adesão: ${escapeHtml(e.adesao||'—')}%</span></div>`).join(''):'<div class="sub">Nenhuma evolução registrada.</div>'}</div>`;modal('Caso comportamental — '+c.animal,body,`<button class="btn" onclick="closeModal()">Fechar</button>`)}
+ function openCaseFor(animal){let c=state.casos.find(x=>animalRecordMatches(x,animal));if(c)viewCase(c.id);else toast('Ainda não existe triagem comportamental vinculada a este animal.')}
+function searchAll(q){const box=$('searchSuggestions');if(!box)return;const term=q.trim().toLocaleLowerCase();if(term.length<1){box.style.display='none';return}const matches=[...state.animais.map(a=>({kind:'animal',name:a.nome,detail:`Animal · responsável: ${a.tutor||'—'}`,id:a.id})),...state.tutores.map(t=>({kind:'tutor',name:t.nome,detail:`Responsável · ${state.animais.filter(a=>a.tutor===t.nome).map(a=>a.nome).join(', ')||'sem animais'}`,id:t.id}))].filter(x=>(x.name+' '+x.detail).toLocaleLowerCase().includes(term)).slice(0,8);box.innerHTML=matches.length?matches.map(x=>`<button class="btn" style="width:100%;text-align:left;margin:2px" onclick="selectSearchResult('${x.kind}','${x.id}')"><b>${escapeHtml(x.name)}</b><span class="sub" style="display:block">${escapeHtml(x.detail)}</span></button>`).join(''):'<div class="sub" style="padding:10px">Nenhum cadastro encontrado.</div>';box.style.display='block'}
+function selectSearchResult(kind,id){const box=$('searchSuggestions');if(box)box.style.display='none';if(kind==='tutor'){show('responsaveis');editTutor(id);return}const a=state.animais.find(x=>String(x.id)===String(id));if(a){show('animais');openPatientChart(a.id)}}
+loadLocalState();
+renderAll();
+setTimeout(()=>{fillFirebaseConfig();if(window.firebaseBridge?.init)window.firebaseBridge.init(getFirebaseConfig()).catch(e=>console.warn(e));},200);
+
+function saveRx(printAfter=false){if(!printAfter){saveRxImpl(false);return}let w=null;try{w=window.open('about:blank','_blank')}catch(e){}window.pendingRxPrintWindow=w||null;try{saveRxImpl(false);if(!$('rxPrint')){if(window.pendingRxPrintWindow){window.pendingRxPrintWindow.close();window.pendingRxPrintWindow=null}return}printRx()}catch(e){if(window.pendingRxPrintWindow){try{window.pendingRxPrintWindow.close()}catch(err){}window.pendingRxPrintWindow=null}console.error('Falha ao salvar/abrir receita',e);toast('Falha ao preparar a receita: '+String(e?.message||e||'erro desconhecido'))}}
+function printRx(){const el=$('rxPrint');if(!el)return toast('Não há documento para imprimir.');let w=window.pendingRxPrintWindow;window.pendingRxPrintWindow=null;const css='@page{size:A4;margin:15mm}body{font-family:Arial,sans-serif;color:#111;background:#fff}.official-notification{position:relative;width:200mm;height:60mm;max-width:none;margin:0;overflow:hidden;page:official}.official-template{position:absolute;inset:0;width:200mm;height:60mm}.official-overlays{position:absolute;inset:0}.official-cover{position:absolute;overflow:hidden;display:flex;flex-direction:column;justify-content:center;font:6pt Arial,sans-serif;line-height:1.25;color:#111;padding:0 .5mm;box-sizing:border-box}.official-v{position:absolute;display:block;overflow:hidden;font:7pt Arial,sans-serif;line-height:1.12;color:#111;white-space:normal;overflow-wrap:anywhere}.official-v[style*=text-align]{white-space:nowrap}.print-area{max-width:780px;margin:auto}.rx-head{display:flex;justify-content:space-between;border-bottom:2px solid #07588f;padding-bottom:14px}.rx-section{margin-top:18px}.rx-line{border-bottom:1px solid #ddd;padding:9px 0}.rx-footer{margin-top:45px;text-align:center;border-top:1px solid #ccc;padding-top:15px;font-size:12px;color:#667}.rx-signature{margin:55px auto 0;text-align:center;max-width:340px;border-top:1px solid #263b45;padding-top:8px}.rx-meta{font-size:12px;color:#5f6e73;line-height:1.55}.special-banner{background:#eef6fb;border:1px solid #cfe1ec;color:#234d64;padding:12px;border-radius:10px;margin:12px 0}.special-title{font-weight:800;color:#07588f;font-size:15px}.print-actions{max-width:780px;margin:12px auto;padding:10px;display:flex;gap:8px;justify-content:flex-end}.print-actions button{padding:10px 16px;background:#07588f;color:#fff;border:0;border-radius:8px;font-size:15px;cursor:pointer}@page official{size:200mm 60mm;margin:0}@media print{.print-actions{display:none!important}body:has(.official-notification){width:200mm;height:60mm;margin:0!important;padding:0!important}.official-notification{break-after:avoid-page;page-break-after:avoid}}';if(w){try{w.document.title='Receita Lia Hoff';let base=w.document.querySelector('base');if(!base){base=w.document.createElement('base');w.document.head.prepend(base)}base.href=document.baseURI;let style=w.document.getElementById('rxPrintStyles');if(!style){style=w.document.createElement('style');style.id='rxPrintStyles';w.document.head.appendChild(style)}style.textContent=css;const toolbar=w.document.createElement('div');toolbar.className='print-actions';toolbar.innerHTML='<button type="button" onclick="window.print()">Imprimir / salvar PDF</button>';w.document.body.replaceChildren(toolbar,w.document.importNode(el,true));if(!w.document.body.querySelector('#rxPrint'))throw new Error('O documento de impressão ficou vazio');w.focus();try{w.print()}catch(e){console.warn('Impressão automática bloqueada; use o botão da receita ou Ctrl+P.',e);toast('A receita está aberta na outra aba. Clique em “Imprimir / salvar PDF” ou use Ctrl+P.')}return}catch(e){console.error('Falha ao montar a receita para impressão',e);try{w.close()}catch(err){}toast('Não foi possível montar a receita para impressão. Abra a visualização e tente novamente.');return}}document.body.classList.add('printing-rx');const cleanup=()=>{document.body.classList.remove('printing-rx');window.removeEventListener('afterprint',cleanup)};window.addEventListener('afterprint',cleanup);try{window.print()}catch(e){console.error('Impressão não disponível nesta página',e);toast('A receita está visível. Use Ctrl+P para abrir a impressão.')}}
+</script>
+<script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signOut as fbSignOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp, runTransaction } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+let app=null,auth=null,db=null,currentUser=null,ready=false,syncBlocked=false,remoteRevision=0,saveQueue=Promise.resolve();
+const stateKey='lia-hoff-state-v2';
+const allowedEmails=new Set(['liahoff.vet@gmail.com','prigeosc@gmail.com']);
+function emailAllowed(email){return allowedEmails.has(String(email||'').trim().toLowerCase())}
+function cfgValid(c){return c&&c.apiKey&&c.authDomain&&c.projectId&&c.appId}
+function stateSnapshot(){try{return JSON.parse(localStorage.getItem(stateKey)||'{"tutores":[],"animais":[],"consultas":[],"casos":[],"prescricoes":[],"financeiro":[]}')}catch(e){return {tutores:[],animais:[],consultas:[],casos:[],prescricoes:[],financeiro:[],prontuarios:[],planos:[],evolucoes:[]}}}
+async function init(config){if(!cfgValid(config))return false;try{app=getApps().length?getApps()[0]:initializeApp(config);auth=getAuth(app);db=getFirestore(app);onAuthStateChanged(auth,async user=>{ready=false;syncBlocked=false;if(user&&(!emailAllowed(user.email)||!user.emailVerified)){currentUser=null;window.updateSyncUI?.();window.toast?.(!emailAllowed(user.email)?'Este e-mail não está autorizado a sincronizar os dados da clínica.':'Confirme o e-mail pelo link enviado antes de sincronizar.');try{await fbSignOut(auth)}catch(e){console.error('Firebase sign out',e)}return}currentUser=user;window.updateSyncUI?.();if(user){try{await pullOrPush(user)}catch(e){reportSyncLoadError(e)}}});return true}catch(e){console.error(e);window.toast?.('Não foi possível inicializar o Firebase. Confira a configuração.');throw e}}
+function reportSyncLoadError(error){ready=false;console.error('Firebase load',error);window.updateSyncUI?.();window.toast?.(error?.code==='permission-denied'?'O Firebase recusou o acesso. Confira as regras do Firestore. Os dados locais foram preservados.':'Não foi possível carregar os dados do Firebase. Os dados locais foram preservados; confira a conexão e tente sincronizar novamente.')}
+async function ensure(config){if(!auth||!db){await init(config)}if(!auth||!db)throw new Error('Firebase não inicializado.')}
+async function connect(config,email,password){if(!emailAllowed(email))throw new Error('A sincronização está autorizada somente para liahoff.vet@gmail.com e prigeosc@gmail.com.');await ensure(config);try{const credential=await signInWithEmailAndPassword(auth,email.trim(),password);if(!credential.user.emailVerified){await sendEmailVerification(credential.user);await fbSignOut(auth);throw new Error('Confirme seu e-mail pelo link enviado. Depois, volte e entre novamente.')}return 'Login aceito. A sincronização será confirmada depois que os dados forem carregados.'}catch(e){throw new Error(e?.message?.startsWith('Confirme seu e-mail')?e.message:firebaseMessage(e))}}
+async function createAccount(config,email,password){if(!emailAllowed(email))throw new Error('Só é permitido criar acesso para liahoff.vet@gmail.com e prigeosc@gmail.com.');await ensure(config);try{const credential=await createUserWithEmailAndPassword(auth,email.trim(),password);await sendEmailVerification(credential.user);await fbSignOut(auth);return 'Enviamos um link de confirmação para esse e-mail. Confirme-o e depois entre no sistema.'}catch(e){throw new Error(firebaseMessage(e))}}
+function stableStringify(value){if(Array.isArray(value))return '['+value.map(stableStringify).join(',')+']';if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+stableStringify(value[k])).join(',')+'}';return JSON.stringify(value)}
+function countRecords(s){return Object.values(s||{}).filter(Array.isArray).reduce((n,a)=>n+a.length,0)}
+async function pullOrPush(user){const ref=doc(db,'users',user.uid,'app','state'),snap=await getDoc(ref),local=window.migrateSnapshot?.(stateSnapshot())||stateSnapshot();if(snap.exists()&&snap.data()?.state){const cloud=window.migrateSnapshot?.(snap.data().state)||snap.data().state;remoteRevision=Number(snap.data().revision)||0;const localHas=countRecords(local)>0,localJSON=stableStringify(local),cloudJSON=stableStringify(cloud);if(localHas&&localJSON!==cloudJSON){syncBlocked=true;ready=false;window.presentCloudConflict?.(local,cloud,remoteRevision);window.updateSyncUI?.();return}if(!localHas){window.adoptSyncedState?.(cloud,remoteRevision);window.toast?.('Dados do Firebase carregados neste dispositivo.')}else window.adoptSyncedState?.(local,remoteRevision);ready=true;window.updateSyncUI?.();return}remoteRevision=0;const created=await runTransaction(db,async tx=>{const current=await tx.get(ref);if(current.exists())return false;tx.set(ref,{state:local,revision:1,updatedAt:serverTimestamp()});return true});if(!created){const current=await getDoc(ref),remote=window.migrateSnapshot?.(current.data()?.state||{})||current.data()?.state||{};remoteRevision=Number(current.data()?.revision)||0;syncBlocked=true;window.presentCloudConflict?.(local,remote,remoteRevision);window.updateSyncUI?.();return}remoteRevision=1;window.adoptSyncedState?.(local,remoteRevision);ready=true;window.toast?.('Dados locais enviados para a nuvem.')}
+async function save(snapshot){if(!ready||syncBlocked||!currentUser||!db)return;saveQueue=saveQueue.then(async()=>{if(!ready||syncBlocked||!currentUser)return;const ref=doc(db,'users',currentUser.uid,'app','state');try{const nextRevision=await runTransaction(db,async tx=>{const snap=await tx.get(ref),current=Number(snap.data()?.revision)||0;if(current!==remoteRevision){const cloud=snap.data()?.state||{};syncBlocked=true;ready=false;window.presentCloudConflict?.(window.migrateSnapshot?.(snapshot)||snapshot,window.migrateSnapshot?.(cloud)||cloud,current);throw new Error('REVISION_CONFLICT')}const revision=current+1;tx.set(ref,{state:snapshot,revision,updatedAt:serverTimestamp()});return revision});remoteRevision=nextRevision;window.setCloudRevision?.(remoteRevision);window.updateSyncUI?.()}catch(e){if(e.message!=='REVISION_CONFLICT'){console.error('Firebase save',e);window.toast?.('Não foi possível sincronizar. Os dados continuam salvos localmente; exporte um backup e tente novamente.')}}}).catch(e=>console.error('Firebase save queue',e));return saveQueue}
+async function finishConflict(choice,chosen,revision){if(choice==='cloud'){remoteRevision=revision;syncBlocked=false;ready=!!currentUser;window.updateSyncUI?.();return remoteRevision}const ref=doc(db,'users',currentUser.uid,'app','state');const next=await runTransaction(db,async tx=>{const snap=await tx.get(ref),current=Number(snap.data()?.revision)||0;if(current!==revision)throw new Error('A nuvem recebeu outra alteração durante a resolução.');tx.set(ref,{state:chosen,revision:current+1,updatedAt:serverTimestamp()});return current+1});remoteRevision=next;syncBlocked=false;ready=!!currentUser;window.updateSyncUI?.();return next}
+async function refreshConflict(local){const ref=doc(db,'users',currentUser.uid,'app','state'),snap=await getDoc(ref),cloud=window.migrateSnapshot?.(snap.data()?.state||{})||snap.data()?.state||{};remoteRevision=Number(snap.data()?.revision)||0;syncBlocked=true;ready=false;window.presentCloudConflict?.(local,cloud,remoteRevision)}
+function firebaseMessage(e){const code=e?.code||'';const map={'auth/invalid-credential':'E-mail ou senha incorretos.','auth/email-already-in-use':'Este e-mail já possui um acesso.','auth/weak-password':'A senha é muito fraca.','auth/invalid-email':'E-mail inválido.','auth/network-request-failed':'Falha de rede ao acessar o Firebase.','auth/operation-not-allowed':'Ative o provedor E-mail/Senha no Firebase Authentication.'};return map[code]||(code==='permission-denied'?'O Firestore recusou o acesso. Revise as regras de segurança.':code==='unavailable'?'Firebase temporariamente indisponível. Confira a conexão e tente novamente.':('Firebase: '+(e?.message||'erro desconhecido')))}
+window.addEventListener('online',()=>{if(!currentUser)return;ready=false;pullOrPush(currentUser).catch(reportSyncLoadError)});
+window.firebaseBridge={init,connect,createAccount,save,finishConflict,refreshConflict,isConnected:()=>ready&&!syncBlocked,userEmail:()=>currentUser?.email||'',signOut:()=>auth?fbSignOut(auth):Promise.resolve()};
+window.updateSyncUI?.();
+</script>
+</body>
+</html>
